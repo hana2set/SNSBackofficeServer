@@ -18,7 +18,6 @@ public class PostAdminService {
 
     @Transactional
     public PostResponseDto updatePost(Long id, PostRequestDto requestDto, User user) {
-        checkUserRole(user);
         Post post = findPost(id);
         post.update(requestDto);
         return new PostResponseDto(post);
@@ -26,7 +25,6 @@ public class PostAdminService {
 
     @Transactional
     public PostResponseDto deletePost(Long id, User user) {
-        checkUserRole(user);
         Post post = findPost(id);
         postRepository.delete(post);
         return new PostResponseDto(post);
@@ -36,11 +34,5 @@ public class PostAdminService {
         return postRepository.findById(id).orElseThrow(() ->
                 new NullPointerException("포스트가 존재하지 않습니다.")
         );
-    }
-
-    private void checkUserRole(User user) {
-        if(user.getRole() != UserRoleEnum.ADMIN){
-            throw new IllegalArgumentException("접근 권한이 없습니다.");
-        }
     }
 }
