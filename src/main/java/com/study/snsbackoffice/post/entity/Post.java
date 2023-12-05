@@ -1,5 +1,6 @@
 package com.study.snsbackoffice.post.entity;
 
+import com.study.snsbackoffice.common.entity.Timestamped;
 import com.study.snsbackoffice.post.dto.PostRequestDto;
 import com.study.snsbackoffice.user.entity.User;
 import jakarta.persistence.*;
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "post")
 @NoArgsConstructor
-public class Post extends Time {
+public class Post extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

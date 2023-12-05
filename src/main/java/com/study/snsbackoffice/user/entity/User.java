@@ -1,5 +1,6 @@
 package com.study.snsbackoffice.user.entity;
 
+import com.study.snsbackoffice.common.entity.Timestamped;
 import com.study.snsbackoffice.user.dto.UserUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "user")
-public class User {
+public class User extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
