@@ -5,7 +5,6 @@ import com.study.snsbackoffice.post.dto.PostResponseDto;
 import com.study.snsbackoffice.post.entity.Post;
 import com.study.snsbackoffice.post.repository.PostRepository;
 import com.study.snsbackoffice.user.entity.User;
-import com.study.snsbackoffice.user.entity.UserRoleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,17 +13,24 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PostAdminService {
 
-    PostRepository postRepository;
+    private final PostRepository postRepository;
+
+    public PostResponseDto createPost(PostRequestDto requestDto, User user) {
+        Post post = postRepository.save(new Post(user, requestDto));
+        post.noticePost();
+        return new PostResponseDto(post);
+    }
+
 
     @Transactional
-    public PostResponseDto updatePost(Long id, PostRequestDto requestDto, User user) {
+    public PostResponseDto updatePost(Long id, PostRequestDto requestDto) {
         Post post = findPost(id);
         post.update(requestDto);
         return new PostResponseDto(post);
     }
 
     @Transactional
-    public PostResponseDto deletePost(Long id, User user) {
+    public PostResponseDto deletePost(Long id) {
         Post post = findPost(id);
         postRepository.delete(post);
         return new PostResponseDto(post);

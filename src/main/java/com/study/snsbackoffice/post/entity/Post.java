@@ -25,6 +25,9 @@ public class Post extends Timestamped {
     @Column
     private String content;
 
+    @Column
+    private boolean notice;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -38,5 +41,9 @@ public class Post extends Timestamped {
     public void update(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
+    }
+
+    public void noticePost(){
+        this.notice = true;
     }
 }

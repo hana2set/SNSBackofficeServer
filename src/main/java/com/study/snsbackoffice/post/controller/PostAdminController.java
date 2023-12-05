@@ -13,17 +13,21 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PostAdminController {
 
-    PostAdminService postAdminService;
+    private final PostAdminService postAdminService;
+
+    @PostMapping
+    public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto,
+                                      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return postAdminService.createPost(postRequestDto, userDetails.getUser());
+    }
 
     @PatchMapping("/{postId}")
-    public PostResponseDto updatePost(@PathVariable Long postId, @RequestBody PostRequestDto postRequestDto,
-                                      @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return postAdminService.updatePost(postId, postRequestDto, userDetails.getUser());
+    public PostResponseDto updatePost(@PathVariable Long postId, @RequestBody PostRequestDto postRequestDto) {
+        return postAdminService.updatePost(postId, postRequestDto);
     }
 
     @DeleteMapping("/{postId}")
-    public PostResponseDto deletePost(@PathVariable Long postId,
-                                      @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return postAdminService.deletePost(postId, userDetails.getUser());
+    public PostResponseDto deletePost(@PathVariable Long postId){
+        return postAdminService.deletePost(postId);
     }
 }
