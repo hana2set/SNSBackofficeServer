@@ -13,24 +13,24 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/posts")
 public class PostController {
 
     private final PostService postService;
-    @PostMapping("/post")
+    @PostMapping
     public PostResponseDto createPost(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                       @RequestBody PostRequestDto postRequestDto)
     {
         return postService.createPost(userDetails.getUser(), postRequestDto);
     }
 
-    @GetMapping("/post/{postId}")
+    @GetMapping("/{postId}")
     public PostResponseDto getPost(@PathVariable Long postId)
     {
         return postService.getPost(postId);
     }
 
-    @GetMapping("/posts")
+    @GetMapping
     public Map<String, List<PostResponseDto>> getPosts(){
         return postService.getPosts();
     }
@@ -40,12 +40,12 @@ public class PostController {
         return postService.getUserPosts(userDetails.getUser());
     }
 
-    @PatchMapping("/post/{postId}")
+    @PatchMapping("/post")
     public PostResponseDto updatePost(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                       @PathVariable Long postId, @RequestBody PostRequestDto postRequestDto) {
         return postService.updatePost(userDetails.getUser(), postId, postRequestDto);
     }
-    @DeleteMapping("/post/{postId}")
+    @DeleteMapping("/post")
     public PostResponseDto deletePost(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                       @PathVariable Long postId){
         return postService.deletePost(userDetails.getUser(), postId);
