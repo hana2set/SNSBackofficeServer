@@ -1,7 +1,7 @@
 package com.study.snsbackoffice.common.filter;
 
 import com.study.snsbackoffice.common.util.JwtUtil;
-import com.study.snsbackoffice.user.entity.RefreshToken;
+import com.study.snsbackoffice.common.entity.RefreshToken;
 import com.study.snsbackoffice.user.entity.UserRoleEnum;
 import com.study.snsbackoffice.user.repository.RefreshTokenRepository;
 import io.jsonwebtoken.Claims;

@@ -1,4 +1,4 @@
-package com.study.snsbackoffice.user.entity;
+package com.study.snsbackoffice.common.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

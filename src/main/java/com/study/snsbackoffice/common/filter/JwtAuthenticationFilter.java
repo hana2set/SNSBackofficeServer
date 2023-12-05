@@ -3,7 +3,7 @@ package com.study.snsbackoffice.common.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.study.snsbackoffice.common.util.JwtUtil;
 import com.study.snsbackoffice.user.dto.LoginRequestDto;
-import com.study.snsbackoffice.user.entity.RefreshToken;
+import com.study.snsbackoffice.common.entity.RefreshToken;
 import com.study.snsbackoffice.user.entity.UserRoleEnum;
 import com.study.snsbackoffice.user.repository.RefreshTokenRepository;
 import jakarta.servlet.FilterChain;
