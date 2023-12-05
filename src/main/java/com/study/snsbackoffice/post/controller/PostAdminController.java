@@ -5,6 +5,7 @@ import com.study.snsbackoffice.post.dto.PostRequestDto;
 import com.study.snsbackoffice.post.dto.PostResponseDto;
 import com.study.snsbackoffice.post.service.PostAdminService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class PostAdminController {
     }
 
     @DeleteMapping("/{postId}")
-    public PostResponseDto deletePost(@PathVariable Long postId){
+    public ResponseEntity<String> deletePost(@PathVariable Long postId){
         return postAdminService.deletePost(postId);
     }
 }
