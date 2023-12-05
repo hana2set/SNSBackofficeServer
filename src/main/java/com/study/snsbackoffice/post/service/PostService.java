@@ -47,12 +47,10 @@ public class PostService {
     @Transactional
     public PostResponseDto updatePost(User user, Long id, PostRequestDto postRequestDto) {
         Post post = findPost(id);
-        if(Objects.equals(post.getUser().getId(), user.getId())){
-            post.update(postRequestDto);
-        }
-        else {
+        if(!user.getId().equals(post.getUser().getId())){
             throw new IllegalArgumentException("일치하지 않는 유저입니다.");
         }
+        post.update(postRequestDto);
         return new PostResponseDto(post);
     }
 
@@ -67,7 +65,7 @@ public class PostService {
 
     private Post findPost(Long id) {
         return postRepository.findById(id).orElseThrow(() ->
-                new NullPointerException("게시글이 없습니다.")
+                new NullPointerException("포스트가 존재하지 않습니다.")
         );
     }
 }
