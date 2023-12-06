@@ -4,11 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class DescriptionResponseDto {
-    private String nickname;
     private String description;
 
-    public DescriptionResponseDto(String nickname, String description) {
-        this.nickname = nickname;
+    public DescriptionResponseDto(String description) {
         this.description = description;
     }
 }

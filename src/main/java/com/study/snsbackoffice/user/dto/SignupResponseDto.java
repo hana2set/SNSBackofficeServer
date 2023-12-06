@@ -6,9 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ResponseSignupDto {
+public class SignupResponseDto {
     private long userId;
-    public ResponseSignupDto(User user) {
+    public SignupResponseDto(User user) {
         this.userId = user.getId();
     }
 }

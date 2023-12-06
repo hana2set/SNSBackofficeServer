@@ -10,7 +10,7 @@ public class UserUpdateResponseDto {
     private String email;
     private String description;
 
-    public UserUpdateResponseDto(UserUpdateRequestDto requestDto) {
+    public UserUpdateResponseDto(UserRequestDto requestDto) {
         this.nickname = requestDto.getNickname();
         this.email = requestDto.getEmail();
         this.description = requestDto.getDescription();

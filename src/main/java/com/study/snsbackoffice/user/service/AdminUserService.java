@@ -1,10 +1,8 @@
 package com.study.snsbackoffice.user.service;
 
 import com.study.snsbackoffice.user.dto.*;
-import com.study.snsbackoffice.common.entity.RefreshToken;
 import com.study.snsbackoffice.user.entity.User;
 import com.study.snsbackoffice.user.entity.UserRoleEnum;
-import com.study.snsbackoffice.user.repository.RefreshTokenRepository;
 import com.study.snsbackoffice.user.repository.UserRepository;
 import com.study.snsbackoffice.user.util.UserValidUtil;
 import jakarta.transaction.Transactional;
@@ -15,18 +13,14 @@ import org.springframework.validation.FieldError;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
-
+public class AdminUserService {
     private final UserRepository userRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
     private final UserValidUtil userValidUtil;
 
-    public UserResponseDto getInfo(User user) {
-        return new UserResponseDto(user);
-    }
     public SignupResponseDto signup(SignupRequestDto requestDto, BindingResult bindingResult) {
         // Validation 예외처리
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -37,45 +31,56 @@ public class UserService {
         }
 
         User user = userValidUtil.getValidNewUserByRequestDto(requestDto);
-        user.setRole(UserRoleEnum.USER);
+        if (requestDto.isAdmin()) {
+            user.setRole(UserRoleEnum.ADMIN);
+        }
 
         // 사용자 등록
         userRepository.save(user);
         return new SignupResponseDto(user);
     }
 
-    public DescriptionResponseDto addDescriptionUser(User user, DescriptionRequestDto requestDto) {
-        user.descUpdate(requestDto.getDesc());
-        userRepository.save(user);
-        return new DescriptionResponseDto(requestDto.getDesc());
+    public AdminUserResponseDto getInfo(Long id) {
+        return new AdminUserResponseDto(userRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 회원 번호입니다.: " + id )
+        ));
     }
 
-    public UserUpdateResponseDto updateUser(User user, UserRequestDto requestDto) {
+    public List<AdminUserResponseDto> getUserlist() {
+        return userRepository.findAll().stream().map(AdminUserResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public AdminUserResponseDto update(Long id, AdminUserRequestDto requestDto) {
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 회원 번호입니다.: " + id )
+        );
+
         // email 중복확인
         Optional<User> checkEmail = userRepository.findByEmailAndIdNot(requestDto.getEmail(), user.getId());
         if (checkEmail.isPresent()) {
             throw new IllegalArgumentException("중복된 Email 입니다.");
         }
 
+        requestDto.setPassword(userValidUtil.encodePassword(requestDto.getPassword()));
         user.update(requestDto);
-        userRepository.save(user);
-        return new UserUpdateResponseDto(requestDto);
+        return new AdminUserResponseDto(user);
     }
 
-    public String logout(User user) {
-        RefreshToken token = refreshTokenRepository.findByUsername(user.getUsername());
-        refreshTokenRepository.delete(token);
-        return user.getUsername();
+    public Long delete(Long id) {
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("선택한 아이디가 존재하지 않습니다.")
+        );
+        userRepository.delete(user);
+        return id;
     }
 
-    public UserResponseDto updatePassword(User user, PasswordRequestDto requestDto) {
-        if (!userValidUtil.matchesPassword(user.getPassword(), requestDto.getPreviousPassword())) {
-            throw new IllegalArgumentException("비밀번호가 일치 하지 않습니다.");
-        }
-
-        user.updatePassword(userValidUtil.encodePassword(requestDto.getPassword()));
-        userRepository.save(user);
-        return new UserResponseDto(user);
+    @Transactional
+    public AdminUserResponseDto ban(Long id) {
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 회원 번호입니다.: " + id )
+        );
+        user.ban();
+        return new AdminUserResponseDto(user);
     }
-
 }

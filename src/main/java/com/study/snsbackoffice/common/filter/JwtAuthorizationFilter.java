@@ -25,7 +25,6 @@ import java.util.List;
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
 
-
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
 
