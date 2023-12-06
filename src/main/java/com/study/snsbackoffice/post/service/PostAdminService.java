@@ -17,6 +17,7 @@ public class PostAdminService {
 
     private final PostRepository postRepository;
 
+    @Transactional
     public PostResponseDto createPost(PostRequestDto requestDto, User user) {
         Post post = postRepository.save(new Post(user, requestDto));
         post.noticePost();

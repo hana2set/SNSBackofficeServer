@@ -5,9 +5,11 @@ import com.study.snsbackoffice.post.dto.PostRequestDto;
 import com.study.snsbackoffice.post.dto.PostResponseDto;
 import com.study.snsbackoffice.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,8 +33,8 @@ public class PostController {
     }
 
     @GetMapping
-    public Map<String, List<PostResponseDto>> getPosts(){
-        return postService.getPosts();
+    public List<PostResponseDto> getAllPosts(){
+        return postService.getAllPosts();
     }
 
     @GetMapping("/userposts")
@@ -40,14 +42,14 @@ public class PostController {
         return postService.getUserPosts(userDetails.getUser());
     }
 
-    @PatchMapping("/post")
+    @PatchMapping("/{postId}")
     public PostResponseDto updatePost(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                       @PathVariable Long postId, @RequestBody PostRequestDto postRequestDto) {
         return postService.updatePost(userDetails.getUser(), postId, postRequestDto);
     }
-    @DeleteMapping("/post")
-    public PostResponseDto deletePost(@AuthenticationPrincipal UserDetailsImpl userDetails,
-                                      @PathVariable Long postId){
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<String> deletePost(@AuthenticationPrincipal UserDetailsImpl userDetails,
+                                             @PathVariable Long postId){
         return postService.deletePost(userDetails.getUser(), postId);
     }
 
