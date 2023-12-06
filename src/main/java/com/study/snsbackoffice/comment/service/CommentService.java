@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -42,14 +44,14 @@ public class CommentService {
 
     @Transactional
     public CommentResponseDto updateComment(Long id, CommentRequestDto requestDto, User user) {
-        Comment comment = findComment(id);
+        Comment comment = commentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("선택한 댓글이 존재하지 않습니다."));
         checkUser(user, comment);
         comment.update(requestDto);
         return new CommentResponseDto(comment);
     }
 
     public ResponseEntity<String> deleteComment(Long id, User user) {
-        Comment comment = findComment(id);
+        Comment comment = commentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("선택한 댓글이 존재하지 않습니다."));
         checkUser(user, comment);
         commentRepository.delete(comment);
         return new ResponseEntity<>("댓글이 삭제되었습니다.", HttpStatus.OK);
@@ -67,15 +69,9 @@ public class CommentService {
         return responseDtoList;
     }
 
-    private Comment findComment(Long id){
-        return commentRepository.findById(id).orElseThrow(() ->
-                new IllegalIdentifierException("선택한 댓글이 존재하지 않습니다.")
-        );
-    }
-
     private void checkUser(User user, Comment comment) {
-        if(user.getId() != comment.getUser().getId()){
-            throw new IllegalArgumentException("작성자만 삭제/수정 할 수 있습니다.")
+        if(!user.getId().equals(comment.getUser().getId())){
+            throw new IllegalArgumentException("작성자만 삭제/수정 할 수 있습니다.");
         }
     }
 }
