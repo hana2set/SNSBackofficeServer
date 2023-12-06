@@ -50,7 +50,10 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        if (user.getIsBanned() == null) {
+            return true;
+        }
+        return !user.getIsBanned();
     }
 
     @Override
