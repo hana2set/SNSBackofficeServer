@@ -1,4 +1,4 @@
-package com.study.snsbackoffice.user.config;
+package com.study.snsbackoffice.common.config;
 
 import com.study.snsbackoffice.common.filter.JwtAuthenticationFilter;
 import com.study.snsbackoffice.common.filter.JwtAuthorizationFilter;
@@ -71,7 +71,7 @@ public class WebSecurityConfig {
                 authorizeHttpRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
                         .requestMatchers("/", "/error/**").permitAll() // 메인페이지, error 페이지 접근 허용
-                        .requestMatchers("/api/users/**").permitAll() // '/api/user/'로 시작하는 요청 모두 접근 허가
+                        .requestMatchers("/api/users/**").permitAll() // '/api/users/'로 시작하는 요청 모두 접근 허가
                         .requestMatchers("/api/admin/**").hasRole(UserRoleEnum.ADMIN.name())
                         .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );

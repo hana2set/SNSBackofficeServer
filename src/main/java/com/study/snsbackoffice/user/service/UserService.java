@@ -1,5 +1,7 @@
 package com.study.snsbackoffice.user.service;
 
+import com.study.snsbackoffice.common.constant.ExceptionType;
+import com.study.snsbackoffice.common.exception.GlobalCustomException;
 import com.study.snsbackoffice.user.dto.*;
 import com.study.snsbackoffice.common.entity.RefreshToken;
 import com.study.snsbackoffice.user.entity.User;
@@ -54,7 +56,7 @@ public class UserService {
         // email 중복확인
         Optional<User> checkEmail = userRepository.findByEmailAndIdNot(requestDto.getEmail(), user.getId());
         if (checkEmail.isPresent()) {
-            throw new IllegalArgumentException("중복된 Email 입니다.");
+            throw new GlobalCustomException(ExceptionType.DUPLICATE_EMAIL);
         }
 
         user.update(requestDto);
