@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -36,37 +38,23 @@ public class CommentService {
         Comment saveComment = new Comment(requestDto, user, post);
 
         commentRepository.save(saveComment);
-        saveComment.setTopParentId(saveComment.getId()); //그룹화를 위해 자기자신 넣음
-
-        if (requestDto.getParentId() != null) {
-            Comment parentComment = commentRepository.findByIdAndPostId(requestDto.getParentId(), requestDto.getPostId()).orElseThrow(() -> new IllegalIdentifierException("해당 댓글이 존재하지 않습니다."));
-            saveComment.addParent(parentComment);
-        }
 
         return new CommentResponseDto(saveComment);
     }
 
     @Transactional
     public CommentResponseDto updateComment(Long id, CommentRequestDto requestDto, User user) {
-        // DB에 존재하는지 확인
-        Comment comment = commentRepository.findById(id).orElseThrow(() -> new IllegalIdentifierException("선택한 댓글이 존재하지 않습니다."));
-        if (!isAccessableUser(user, comment.getUser())) {
-            throw new IllegalIdentifierException("작성자만 삭제/수정할 수 있습니다");
-        }
-
+        Comment comment = commentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("선택한 댓글이 존재하지 않습니다."));
+        checkUser(user, comment);
         comment.update(requestDto);
         return new CommentResponseDto(comment);
     }
 
-    public ResponseEntity deleteComment(Long id, User user) {
-        // DB에 존재하는지 확인
-        Comment comment = commentRepository.findById(id).orElseThrow(() -> new IllegalIdentifierException("선택한 댓글이 존재하지 않습니다."));
-        if (!isAccessableUser(user, comment.getUser())) {
-            throw new IllegalIdentifierException("작성자만 삭제/수정할 수 있습니다");
-        }
-
+    public ResponseEntity<String> deleteComment(Long id, User user) {
+        Comment comment = commentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("선택한 댓글이 존재하지 않습니다."));
+        checkUser(user, comment);
         commentRepository.delete(comment);
-        return new ResponseEntity("댓글이 삭제되었습니다", HttpStatus.OK);
+        return new ResponseEntity<>("댓글이 삭제되었습니다.", HttpStatus.OK);
     }
 
     public Page<CommentResponseDto> getCommentsInPost(Long postId, int page) {
@@ -81,16 +69,9 @@ public class CommentService {
         return responseDtoList;
     }
 
-    private boolean isAccessableUser(User target_user, User access_user) {
-        if (target_user == null || access_user == null) {
-            return false;
+    private void checkUser(User user, Comment comment) {
+        if(!user.getId().equals(comment.getUser().getId())){
+            throw new IllegalArgumentException("작성자만 삭제/수정 할 수 있습니다.");
         }
-
-        if (access_user.getRole() == UserRoleEnum.ADMIN || access_user.getId().equals(target_user.getId())) {
-            return true;
-        }
-
-        return false;
     }
-
 }

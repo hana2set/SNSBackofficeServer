@@ -23,14 +23,6 @@ public class Comment extends Timestamped {
     private String text;
 
     @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private Comment parent;      // 상위 댓글
-
-    @Column
-    private Long topParentId;
-
-
-    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -42,17 +34,6 @@ public class Comment extends Timestamped {
         this.text = requestDto.getText();
         this.post = post;
         this.user = user;
-    }
-
-    public void addParent(Comment parentComment) {
-        this.parent = parentComment;
-        if (this.topParentId == this.id) { //부모 댓글이 있으면 최상단 부모 id 저장
-            if (parentComment.getParent() != null) {
-                this.topParentId = parentComment.getParent().getTopParentId();
-            } else {
-                this.topParentId = parentComment.getId();
-            }
-        }
     }
 
     public void update(CommentRequestDto requestDto) {
