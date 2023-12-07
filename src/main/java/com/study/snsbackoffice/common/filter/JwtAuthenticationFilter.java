@@ -1,12 +1,13 @@
 package com.study.snsbackoffice.common.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.study.snsbackoffice.common.refreshToken.RefreshTokenService;
 import com.study.snsbackoffice.common.util.JwtUtil;
 import com.study.snsbackoffice.user.dto.LoginRequestDto;
 import com.study.snsbackoffice.common.entity.RefreshToken;
 import com.study.snsbackoffice.user.entity.User;
 import com.study.snsbackoffice.user.entity.UserRoleEnum;
-import com.study.snsbackoffice.user.repository.RefreshTokenRepository;
+import com.study.snsbackoffice.common.refreshToken.RefreshTokenRepository;
 import com.study.snsbackoffice.user.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -31,12 +32,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
+    private final RefreshTokenService refreshTokenService;
 
-    public JwtAuthenticationFilter(JwtUtil jwtUtil, UserRepository userRepository, RefreshTokenRepository refreshTokenRepository) {
+    public JwtAuthenticationFilter(JwtUtil jwtUtil, UserRepository userRepository, RefreshTokenService refreshTokenService) {
         this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
-        this.refreshTokenRepository = refreshTokenRepository;
+        this.refreshTokenService = refreshTokenService;
         setFilterProcessesUrl("/api/users/login");
     }
 
@@ -74,9 +75,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         user.resetLoginCount();
         userRepository.save(user);
 
-        String accessToken = jwtUtil.createToken(username, role, "Access");
-        String refreshToken = jwtUtil.createToken(username,role, "Refresh");
-        refreshTokenRepository.save(new RefreshToken(refreshToken.substring(7), username));
+        String accessToken = jwtUtil.createToken(username, role);
+        String refreshToken = refreshTokenService.createRefreshToken(user);
         response.addHeader(JwtUtil.ACCESS_TOKEN_HEADER, accessToken);
         response.addHeader(JwtUtil.REFRESH_TOKEN_HEADER, refreshToken);
     }

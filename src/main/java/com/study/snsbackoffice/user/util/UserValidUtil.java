@@ -1,5 +1,7 @@
 package com.study.snsbackoffice.user.util;
 
+import com.study.snsbackoffice.common.constant.ExceptionType;
+import com.study.snsbackoffice.common.exception.GlobalCustomException;
 import com.study.snsbackoffice.user.dto.SignupRequestDto;
 import com.study.snsbackoffice.user.entity.User;
 import com.study.snsbackoffice.user.repository.UserRepository;
@@ -28,20 +30,20 @@ public class UserValidUtil {
         // 회원 중복 확인
         Optional<User> checkUsername = userRepository.findByUsername(username);
         if (checkUsername.isPresent()) {
-            throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
+            throw new GlobalCustomException(ExceptionType.DUPLICATE_USER);
         }
 
         // email 중복확인
         Optional<User> checkEmail = userRepository.findByEmail(email);
         if (checkEmail.isPresent()) {
-            throw new IllegalArgumentException("중복된 Email 입니다.");
+            throw new GlobalCustomException(ExceptionType.DUPLICATE_EMAIL);
         }
 
         return new User(username, password, email, nickname);
     }
 
-    public boolean matchesPassword(String originPassword, String newPassword) {
-        if (passwordEncoder.matches(newPassword, originPassword)) {
+    public boolean matchesPassword(String encodedPassword, String password) {
+        if (passwordEncoder.matches(password, encodedPassword)) {
             return true;
         };
 

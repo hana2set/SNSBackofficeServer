@@ -3,11 +3,11 @@ package com.study.snsbackoffice.common.config;
 import com.study.snsbackoffice.common.filter.JwtAuthenticationFilter;
 import com.study.snsbackoffice.common.filter.JwtAuthorizationFilter;
 import com.study.snsbackoffice.common.filter.UserDetailsServiceImpl;
+import com.study.snsbackoffice.common.refreshToken.RefreshTokenService;
 import com.study.snsbackoffice.common.util.JwtUtil;
 import com.study.snsbackoffice.user.entity.UserRoleEnum;
-import com.study.snsbackoffice.user.repository.RefreshTokenRepository;
+import com.study.snsbackoffice.common.refreshToken.RefreshTokenRepository;
 import com.study.snsbackoffice.user.repository.UserRepository;
-import com.study.snsbackoffice.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -32,7 +31,7 @@ public class WebSecurityConfig {
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
     private final UserRepository userRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
+    private final RefreshTokenService refreshTokenService;
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -47,14 +46,14 @@ public class WebSecurityConfig {
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
 
-        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtUtil, userRepository, refreshTokenRepository);
+        JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtUtil, userRepository, refreshTokenService);
         filter.setAuthenticationManager(authenticationManager(authenticationConfiguration));
         return filter;
     }
 
     @Bean
     public JwtAuthorizationFilter jwtAuthorizationFilter() {
-        return new JwtAuthorizationFilter(jwtUtil, userDetailsService, refreshTokenRepository);
+        return new JwtAuthorizationFilter(jwtUtil, userDetailsService, refreshTokenService);
     }
 
     @Bean
