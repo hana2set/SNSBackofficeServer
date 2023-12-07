@@ -2,10 +2,12 @@ package com.study.snsbackoffice.user.entity;
 
 import com.study.snsbackoffice.common.entity.Timestamped;
 import com.study.snsbackoffice.follow.entity.Follow;
+import com.study.snsbackoffice.common.util.StringListConverter;
 import com.study.snsbackoffice.user.dto.AdminUserRequestDto;
 import com.study.snsbackoffice.user.dto.UserRequestDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,7 +48,8 @@ public class User extends Timestamped {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime unbannedAt;
 
-    private List<String> beforePassword = new ArrayList<>();
+    @Convert(converter = StringListConverter.class)
+    private List<String> beforePassword = new ArrayList<>(); // 지금 암호 + 기존 3개암호
 
     @OneToMany(mappedBy = "following")
     private List<Follow> followerList;
@@ -58,6 +61,12 @@ public class User extends Timestamped {
     @NotNull
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role = UserRoleEnum.USER; //기본값 user
+
+
+    @Transient
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private final int MAX_BEFORE_PASSWORD_SIZE = 4;
 
     public User(String username, String password, String email, String nickName) {
         this.username =  username;
@@ -95,8 +104,10 @@ public class User extends Timestamped {
     }
 
     public void updatePassword(String password) {
-        if (beforePassword.size() > 3) {
+        if (beforePassword.size() == MAX_BEFORE_PASSWORD_SIZE) {
             beforePassword.remove(0);
+        } else if (beforePassword.size() > MAX_BEFORE_PASSWORD_SIZE) {
+            beforePassword = beforePassword.subList(beforePassword.size() - MAX_BEFORE_PASSWORD_SIZE + 1, beforePassword.size());
         }
         this.beforePassword.add(password);
         this.password = password;

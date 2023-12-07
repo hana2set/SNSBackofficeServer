@@ -1,5 +1,7 @@
 package com.study.snsbackoffice.user.service;
 
+import com.study.snsbackoffice.common.constant.ExceptionType;
+import com.study.snsbackoffice.common.exception.GlobalCustomException;
 import com.study.snsbackoffice.user.dto.*;
 import com.study.snsbackoffice.user.entity.User;
 import com.study.snsbackoffice.user.entity.UserRoleEnum;
@@ -26,7 +28,7 @@ public class AdminUserService {
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         if(fieldErrors.size() > 0) {
             for (FieldError fieldError : bindingResult.getFieldErrors()) {
-                throw new IllegalArgumentException(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
+                throw new GlobalCustomException(ExceptionType.FIELD_VALIDATION, fieldError.getField(), fieldError.getDefaultMessage());
             }
         }
 
@@ -42,7 +44,7 @@ public class AdminUserService {
 
     public AdminUserResponseDto getInfo(Long id) {
         return new AdminUserResponseDto(userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 회원 번호입니다.: " + id )
+                () -> new GlobalCustomException(ExceptionType.NOT_EXIST_USER, id.toString())
         ));
     }
 
@@ -53,14 +55,13 @@ public class AdminUserService {
     @Transactional
     public AdminUserResponseDto update(Long id, AdminUserRequestDto requestDto) {
         User user = userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 회원 번호입니다.: " + id )
+                () -> new GlobalCustomException(ExceptionType.NOT_EXIST_USER, id.toString())
         );
 
         // email 중복확인
-        Optional<User> checkEmail = userRepository.findByEmailAndIdNot(requestDto.getEmail(), user.getId());
-        if (checkEmail.isPresent()) {
-            throw new IllegalArgumentException("중복된 Email 입니다.");
-        }
+        userRepository.findByEmailAndIdNot(requestDto.getEmail(), user.getId()).orElseThrow(
+                () -> new GlobalCustomException(ExceptionType.DUPLICATE_EMAIL, id.toString())
+        );
 
         requestDto.setPassword(userValidUtil.encodePassword(requestDto.getPassword()));
         user.update(requestDto);
@@ -69,7 +70,7 @@ public class AdminUserService {
 
     public Long delete(Long id) {
         User user = userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("선택한 아이디가 존재하지 않습니다.")
+                () -> new GlobalCustomException(ExceptionType.NOT_EXIST_USER, id.toString())
         );
         userRepository.delete(user);
         return id;
@@ -78,7 +79,7 @@ public class AdminUserService {
     @Transactional
     public AdminUserResponseDto ban(Long id) {
         User user = userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않는 회원 번호입니다.: " + id )
+                () -> new GlobalCustomException(ExceptionType.NOT_EXIST_USER, id.toString())
         );
         user.ban();
         return new AdminUserResponseDto(user);
