@@ -52,11 +52,21 @@ public class User extends Timestamped {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role = UserRoleEnum.USER; //기본값 user
 
+    private Long kakaoId;
+
     public User(String username, String password, String email, String nickName) {
         this.username =  username;
         this.password = password;
         this.email = email;
         this.nickname = nickName;
+    }
+
+    public User(String username, String password, String email, String nickName, Long kakaoId) {
+        this.username =  username;
+        this.password = password;
+        this.email = email;
+        this.nickname = nickName;
+        this.kakaoId = kakaoId;
     }
     public void update(UserRequestDto requestDto) {
         if(requestDto.getDescription() != null)
