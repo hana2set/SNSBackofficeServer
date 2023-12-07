@@ -34,7 +34,7 @@ public class UserService {
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
         if(fieldErrors.size() > 0) {
             for (FieldError fieldError : bindingResult.getFieldErrors()) {
-                throw new IllegalArgumentException(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
+                throw new GlobalCustomException(ExceptionType.FIELD_VALIDATION, fieldError.getField(), fieldError.getDefaultMessage());
             }
         }
 
@@ -71,8 +71,15 @@ public class UserService {
     }
 
     public UserResponseDto updatePassword(User user, PasswordRequestDto requestDto) {
+        // 현재 패스워드가 맞는지
         if (!userValidUtil.matchesPassword(user.getPassword(), requestDto.getPreviousPassword())) {
-            throw new IllegalArgumentException("비밀번호가 일치 하지 않습니다.");
+            throw new GlobalCustomException(ExceptionType.WRONG_PREVIOUS_PASSWORD);
+        }
+
+        // 변경하려는 패스워드와 기존 3회전 사용하던 비밀번호 일치 여부
+        if (user.getBeforePassword().stream().anyMatch(
+                (bp) -> userValidUtil.matchesPassword(bp, requestDto.getPassword()))) {
+            throw new GlobalCustomException(ExceptionType.EXISTING_PREVIOUS_PASSWORD);
         }
 
         user.updatePassword(userValidUtil.encodePassword(requestDto.getPassword()));
