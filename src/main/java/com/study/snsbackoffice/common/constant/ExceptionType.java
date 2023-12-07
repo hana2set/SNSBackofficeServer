@@ -24,7 +24,12 @@ public enum ExceptionType {
     BAN_USER(HttpStatus.FORBIDDEN, "차단된 사용자입니다. 관리자에게 문의해주세요."),
     BAN_USER_TEMP(HttpStatus.FORBIDDEN, "일시적으로 접근이 제한된 사용자입니다. {0} 이후에 시도해주세요."),
 
+    REFRESH_TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "만료된 토큰입니다. 재인증이 필요합니다."),
+    REFRESH_TOKEN_NOT_EXIST(HttpStatus.UNAUTHORIZED, "토큰 정보가 없습니다."),
+
     ;
+
+
 
 
     private final HttpStatus status;

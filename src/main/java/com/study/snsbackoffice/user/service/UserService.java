@@ -6,10 +6,9 @@ import com.study.snsbackoffice.user.dto.*;
 import com.study.snsbackoffice.common.entity.RefreshToken;
 import com.study.snsbackoffice.user.entity.User;
 import com.study.snsbackoffice.user.entity.UserRoleEnum;
-import com.study.snsbackoffice.user.repository.RefreshTokenRepository;
+import com.study.snsbackoffice.common.refreshToken.RefreshTokenRepository;
 import com.study.snsbackoffice.user.repository.UserRepository;
 import com.study.snsbackoffice.user.util.UserValidUtil;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -62,12 +61,6 @@ public class UserService {
         user.update(requestDto);
         userRepository.save(user);
         return new UserUpdateResponseDto(requestDto);
-    }
-
-    public String logout(User user) {
-        RefreshToken token = refreshTokenRepository.findByUsername(user.getUsername());
-        refreshTokenRepository.delete(token);
-        return user.getUsername();
     }
 
     public UserResponseDto updatePassword(User user, PasswordRequestDto requestDto) {

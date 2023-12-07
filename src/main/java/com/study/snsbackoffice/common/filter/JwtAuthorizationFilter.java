@@ -1,9 +1,13 @@
 package com.study.snsbackoffice.common.filter;
 
+import com.study.snsbackoffice.common.constant.ExceptionType;
+import com.study.snsbackoffice.common.exception.GlobalCustomException;
+import com.study.snsbackoffice.common.refreshToken.RefreshTokenService;
 import com.study.snsbackoffice.common.util.JwtUtil;
 import com.study.snsbackoffice.common.entity.RefreshToken;
+import com.study.snsbackoffice.user.entity.User;
 import com.study.snsbackoffice.user.entity.UserRoleEnum;
-import com.study.snsbackoffice.user.repository.RefreshTokenRepository;
+import com.study.snsbackoffice.common.refreshToken.RefreshTokenRepository;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -28,47 +32,50 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
 
-    private final RefreshTokenRepository refreshTokenRepository;
+    private final RefreshTokenService refreshTokenService;
 
-    public JwtAuthorizationFilter(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService, RefreshTokenRepository refreshTokenRepository) {
+    public JwtAuthorizationFilter(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService, RefreshTokenService refreshTokenService) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
-        this.refreshTokenRepository = refreshTokenRepository;
+        this.refreshTokenService = refreshTokenService;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
 
-        String accessTokenValue = jwtUtil.getJwtFromHeader(req, "Access");
-        String refreshTokenValue = jwtUtil.getJwtFromHeader(req, "Refresh");
+        String accessTokenValue = jwtUtil.getJwtFromHeader(req);
+        String refreshTokenValue = req.getHeader(jwtUtil.REFRESH_TOKEN_HEADER);
 
-        if (StringUtils.hasText(accessTokenValue)) {
-            // JWT 토큰 substring
-            // 만료되었을 때 response 반환해줘야 한다. -> 미구현
-            if (jwtUtil.validateToken(accessTokenValue)) {
-                Claims info = jwtUtil.getUserInfoFromToken(accessTokenValue);
-                try {
+        try {
+            if (StringUtils.hasText(accessTokenValue)) {
+                // JWT 토큰
+                if (jwtUtil.validateToken(accessTokenValue)) {
+                    Claims info = jwtUtil.getUserInfoFromToken(accessTokenValue);
+
                     setAuthentication(info.getSubject());
-                } catch (Exception e) {
-                    log.error(e.getMessage());
-                    return;
-                }
-            } else {
-                if (StringUtils.hasText(refreshTokenValue)) {
-                    if (validateRefreshToken(refreshTokenValue)) {
-                        Claims info = jwtUtil.getUserInfoFromToken(refreshTokenValue);
-                        String accessToken = jwtUtil.createToken(info.getSubject(), UserRoleEnum.valueOf(info.get(JwtUtil.AUTHORIZATION_KEY, String.class)), "Access");
-                        res.addHeader(JwtUtil.ACCESS_TOKEN_HEADER, accessToken);
-                        try {
-                            setAuthentication(info.getSubject());
-                        } catch (Exception e) {
-                            log.error(e.getMessage());
-                            return;
-                        }
-                    }
+                } else if (StringUtils.hasText(refreshTokenValue)) {
+                    RefreshToken refreshToken = refreshTokenService.findByToken(refreshTokenValue).orElseThrow(
+                            () -> new GlobalCustomException(ExceptionType.REFRESH_TOKEN_NOT_EXIST)
+                    );
+
+                    //TODO Access 토큰과 비교해 부정한 사용자인지 확인하면 더 좋을듯
+
+                    //유효 검사
+                    refreshToken = refreshTokenService.verifyExpiration(refreshToken);
+
+                    // 유효하면 JWT 토큰 재발급
+                    User user = refreshToken.getUser();
+                    String accessToken = jwtUtil.createToken(user.getUsername(), user.getRole());
+                    res.addHeader(JwtUtil.ACCESS_TOKEN_HEADER, accessToken);
+
+                    setAuthentication(user.getUsername());
                 }
             }
+        } catch (Exception e) {
+            log.error(e.getMessage());
         }
+
+        //인증 필요 url에서 setAuthentication 실패시 403
         filterChain.doFilter(req, res);
     }
 
@@ -87,13 +94,4 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 
-    private boolean validateRefreshToken(String refreshTokenValue) {
-        List<RefreshToken> refreshToken = refreshTokenRepository.findAll();
-        for (RefreshToken token : refreshToken) {
-            if (token.getRefreshToken().equals(refreshTokenValue)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

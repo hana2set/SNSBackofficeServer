@@ -21,24 +21,24 @@ public class JwtUtil {
     // Header Access KEY 값
     public static final String ACCESS_TOKEN_HEADER = "AccessToken";
 
-    public static final String REFRESH_TOKEN_HEADER = "RefreshToken";
+    // Header refresh token 값
+    public static final String REFRESH_TOKEN_HEADER = "refreshToken";
 
     // 사용자 권한 값의 KEY
     public static final String AUTHORIZATION_KEY = "auth";
     // Token 식별자
     public static final String BEARER_PREFIX = "Bearer ";
 
-    // Access 토큰 만료시간 - > 테스트를 위해 임시로 3분으로 설정
-    private final long ACCESS_TOKEN_TIME = Duration.ofHours(1).toMillis(); // 60분
-
-    // Refresh Token 만료시간
-    private final long REFRESH_TOKEN_TIME = Duration.ofDays(30).toMillis();
-
-
 
     // accesssecret plain value
     @Value("${jwt.secret.key}")
     private String secretKey;
+
+    // Access 토큰 만료시간
+    @Value("${jwt.secret.access_token_expiry_ms}")
+    private long ACCESS_TOKEN_TIME;
+
+
     private Key key;
     private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
@@ -52,25 +52,23 @@ public class JwtUtil {
     }
 
     // 토큰 생성
-    public String createToken(String username, UserRoleEnum role, String type) {
+    public String createToken(String username, UserRoleEnum role) {
         Date date = new Date();
-
-        long time = (type.equals("Access")) ? ACCESS_TOKEN_TIME : REFRESH_TOKEN_TIME;
 
         return BEARER_PREFIX +
                 Jwts.builder()
                         .setSubject(username) // 사용자 식별자값(ID)
                         .claim(AUTHORIZATION_KEY, role) // 사용자 권한
-                        .setExpiration(new Date(date.getTime() + time)) // 만료 시간
+                        .setExpiration(new Date(date.getTime() + ACCESS_TOKEN_TIME)) // 만료 시간
                         .setIssuedAt(date) // 발급일
                         .signWith(key, signatureAlgorithm) // 암호화 알고리즘
                         .compact();
     }
 
     // header 에서 JWT 가져오기
-    public String getJwtFromHeader(HttpServletRequest request, String type) {
-        String header = (type.equals("Access")) ? ACCESS_TOKEN_HEADER : REFRESH_TOKEN_HEADER;
-        String bearerToken = request.getHeader(header);
+    public String getJwtFromHeader(HttpServletRequest request) {
+        String header = ACCESS_TOKEN_HEADER;
+        String bearerToken = request.getHeader(ACCESS_TOKEN_HEADER);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
             return bearerToken.substring(7);
         }
