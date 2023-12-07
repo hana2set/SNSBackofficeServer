@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -35,6 +36,16 @@ public class FollowService {
         followRepository.save(follow);
 
         return new ResponseEntity<>(following.getNickname() + "님을 팔로우하였습니다.", HttpStatus.OK);
+    }
+
+    @Transactional
+    public ResponseEntity<String> unFollowUser(Long followingId, User follower) {
+        Follow follow = followRepository.findByFollowingIdAndFollowerId(followingId, follower.getId())
+                .orElseThrow(() -> new GlobalCustomException(ExceptionType.NOT_EXIST_FOLLOW));
+
+        User following = findUser(followingId);
+        followRepository.delete(follow);
+        return new ResponseEntity<>(following.getNickname() + "님을 팔로우 취소하였습니다.", HttpStatus.OK);
     }
 
     private User findUser(Long userId){
