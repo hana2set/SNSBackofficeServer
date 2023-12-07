@@ -42,7 +42,7 @@ public class AdminUserController {
         return adminUserService.delete(id);
     }
 
-    @PatchMapping("/users/ban/{id}")
+    @PatchMapping("/users/{id}/ban")
     public AdminUserResponseDto ban(@PathVariable Long id){
         return adminUserService.ban(id);
     }
