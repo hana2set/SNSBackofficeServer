@@ -1,6 +1,7 @@
 package com.study.snsbackoffice.user.entity;
 
 import com.study.snsbackoffice.common.entity.Timestamped;
+import com.study.snsbackoffice.follow.entity.Follow;
 import com.study.snsbackoffice.user.dto.AdminUserRequestDto;
 import com.study.snsbackoffice.user.dto.UserRequestDto;
 import jakarta.persistence.*;
@@ -46,6 +47,12 @@ public class User extends Timestamped {
     private LocalDateTime unbannedAt;
 
     private List<String> beforePassword = new ArrayList<>();
+
+    @OneToMany(mappedBy = "following")
+    private List<Follow> followerList;
+
+    @OneToMany(mappedBy = "follower")
+    private List<Follow> followingList;
 
     @Column(nullable = false)
     @NotNull

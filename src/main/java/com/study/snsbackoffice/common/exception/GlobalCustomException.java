@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @NoArgsConstructor
-
 public class GlobalCustomException extends RuntimeException {
 
     private HttpStatus status = HttpStatus.BAD_REQUEST;
