@@ -2,6 +2,8 @@ package com.study.snsbackoffice.follow.service;
 
 import com.study.snsbackoffice.common.constant.ExceptionType;
 import com.study.snsbackoffice.common.exception.GlobalCustomException;
+import com.study.snsbackoffice.follow.dto.FollowerResponseDto;
+import com.study.snsbackoffice.follow.dto.FollowingResponseDto;
 import com.study.snsbackoffice.follow.entity.Follow;
 import com.study.snsbackoffice.follow.respository.FollowRepository;
 import com.study.snsbackoffice.user.entity.User;
@@ -12,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,6 +50,28 @@ public class FollowService {
         User following = findUser(followingId);
         followRepository.delete(follow);
         return new ResponseEntity<>(following.getNickname() + "님을 팔로우 취소하였습니다.", HttpStatus.OK);
+    }
+
+    public FollowingResponseDto getFollowings(Long userId) {
+        User user = findUser(userId);
+        List<String> followingUserList = new ArrayList<>();
+
+        for(Follow follow : user.getFollowingList()){
+           followingUserList.add(follow.getFollowing().getNickname());
+        }
+
+        return new FollowingResponseDto(followingUserList);
+    }
+
+    public FollowerResponseDto getFollowers(Long userId) {
+        User user = findUser(userId);
+        List<String> followerUserList = new ArrayList<>();
+
+        for(Follow follow : user.getFollowerList()){
+            followerUserList.add(follow.getFollower().getNickname());
+        }
+
+        return new FollowerResponseDto(followerUserList);
     }
 
     private User findUser(Long userId){
