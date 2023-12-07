@@ -1,5 +1,7 @@
 package com.study.snsbackoffice.common.filter;
 
+import com.study.snsbackoffice.common.constant.ExceptionType;
+import com.study.snsbackoffice.common.exception.GlobalCustomException;
 import com.study.snsbackoffice.user.entity.User;
 import com.study.snsbackoffice.user.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,13 +29,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         if (user.getIsBanned() != null && user.getIsBanned() == true) {
             if (user.getUnbannedAt() == null) {
-                throw new IllegalArgumentException("차단된 사용자입니다. 관리자에게 문의해주세요.");
+                throw new GlobalCustomException(ExceptionType.BAN_USER);
             }
 
             if (user.getUnbannedAt().isBefore(LocalDateTime.now())) {
                 user.setIsBanned(false);
             } else {
-                throw new IllegalArgumentException("일시적으로 접근이 제한된 사용자입니다. " + user.getUnbannedAt() + " 이후에 시도해주세요.");
+                throw new GlobalCustomException(ExceptionType.BAN_USER_TEMP, user.getUnbannedAt().toString());
             }
         }
 

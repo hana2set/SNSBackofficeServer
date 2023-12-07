@@ -21,6 +21,9 @@ public enum ExceptionType {
     NOT_EXIST_USER(HttpStatus.BAD_REQUEST, "존재하지 않는 회원 번호입니다.: {0}"),
     DUPLICATE_USER(HttpStatus.BAD_REQUEST, "중복된 사용자가 존재합니다."),
     DUPLICATE_EMAIL(HttpStatus.BAD_REQUEST, "중복된 Email 입니다."),
+    BAN_USER(HttpStatus.FORBIDDEN, "차단된 사용자입니다. 관리자에게 문의해주세요."),
+    BAN_USER_TEMP(HttpStatus.FORBIDDEN, "일시적으로 접근이 제한된 사용자입니다. {0} 이후에 시도해주세요."),
+
     ;
 
 
