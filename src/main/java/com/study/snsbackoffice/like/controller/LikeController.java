@@ -22,6 +22,7 @@ public class LikeController {
     public ResponseEntity<String> likePost(@PathVariable Long postId,
                                            @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
+        System.out.println(1);
         User user = userDetails.getUser();
         return likeService.likePost(postId, user);
     }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "PostLikes")
+@Table(name = "post_likes")
 public class PostLikes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
