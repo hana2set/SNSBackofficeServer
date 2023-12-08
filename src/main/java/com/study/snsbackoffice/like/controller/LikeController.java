@@ -17,15 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class LikeController {
 
     private final LikeService likeService;
-    private final PostLikesRepository postLikesRepositoryRepository;
-    private final PostRepository postRepository;
 
-    @PostMapping("/posts/{postId}/like")
+    @PostMapping("/posts/{postId}/likes")
     public ResponseEntity<String> likePost(@PathVariable Long postId,
                                            @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         User user = userDetails.getUser();
-        likeService.likePost(postId, user);
-
+        return likeService.likePost(postId, user);
     }
 }

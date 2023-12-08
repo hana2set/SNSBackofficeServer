@@ -26,7 +26,6 @@ public class PostLikes {
     @JoinColumn(name = "user_id")
     private User user;
 
-
     public PostLikes(Post post, User user) {
         this.post = post;
         this.user = user;

@@ -7,6 +7,7 @@ import com.study.snsbackoffice.post.entity.Post;
 import com.study.snsbackoffice.post.repository.PostRepository;
 import com.study.snsbackoffice.user.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,8 @@ public class LikeService {
         postLikes.setPost(post); // 외래 키(연관 관계) 설정
 
         postLikesRepository.save(postLikes);
+
+        return new ResponseEntity<>(post.getTitle() + " 좋아요.", HttpStatus.OK);
     }
 
 }
