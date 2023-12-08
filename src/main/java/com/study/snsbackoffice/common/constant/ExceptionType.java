@@ -34,8 +34,8 @@ public enum ExceptionType {
     NOT_EXIST_POST(HttpStatus.BAD_REQUEST, "포스트가 존재하지 않습니다."),
     ONLY_AUTHOR_ACCESS(HttpStatus.BAD_REQUEST, "작성자만 수정/삭제 가능합니다."),
 
-    NOT_EXIST_COMMENT(HttpStatus.BAD_REQUEST, "댓글이 존재하지 않습니다.")
-    ;
+    NOT_EXIST_COMMENT(HttpStatus.BAD_REQUEST, "댓글이 존재하지 않습니다."),
+    DUPLICATE_EMAIL(HttpStatus.BAD_REQUEST, "중복된 이메일 입니다.");
 
 
     private final HttpStatus status;

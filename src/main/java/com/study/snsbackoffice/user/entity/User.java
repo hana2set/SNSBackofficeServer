@@ -68,12 +68,24 @@ public class User extends Timestamped {
     @Setter(AccessLevel.NONE)
     private final int MAX_BEFORE_PASSWORD_SIZE = 4;
 
+    private Long kakaoId;
+
     public User(String username, String password, String email, String nickName) {
         this.username =  username;
         this.password = password;
         this.email = email;
         this.nickname = nickName;
     }
+
+    public User(String nickname, String password, String email, UserRoleEnum userRoleEnum, Long kakaoId) {
+        this.nickname = nickname;
+        this.username = nickname;
+        this.password = password;
+        this.email = email;
+        this.role = userRoleEnum;
+        this.kakaoId = kakaoId;
+    }
+
     public void update(UserRequestDto requestDto) {
         if(requestDto.getDescription() != null)
             this.desc = requestDto.getDescription();
@@ -116,5 +128,10 @@ public class User extends Timestamped {
     public void ban() {
         this.isBanned = true;
         this.unbannedAt = null;
+    }
+
+    public User kakaoIdUpdate(Long kakaoId) {
+        this.kakaoId = kakaoId;
+        return this;
     }
 }
