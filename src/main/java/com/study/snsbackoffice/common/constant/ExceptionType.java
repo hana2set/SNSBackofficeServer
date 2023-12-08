@@ -38,6 +38,7 @@ public enum ExceptionType {
     NOT_EXIST_COMMENT(HttpStatus.BAD_REQUEST, "댓글이 존재하지 않습니다."),
 
     ALREADY_EXIST_LIKE(HttpStatus.BAD_REQUEST, "이미 좋아요를 했습니다."),
+    NOT_EXIST_LIKE(HttpStatus.BAD_REQUEST, "좋아요를 하지 않았습니다.")
 
 
 

@@ -22,8 +22,14 @@ public class LikeController {
     public ResponseEntity<String> likePost(@PathVariable Long postId,
                                            @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        System.out.println(1);
         User user = userDetails.getUser();
         return likeService.likePost(postId, user);
+    }
+
+    @DeleteMapping("/posts/{postId}/likes")
+    public ResponseEntity<String> deletePostLike(@PathVariable Long postId,
+                                                 @AuthenticationPrincipal UserDetailsImpl userDetails){
+        User user = userDetails.getUser();
+        return likeService.deletePostLike(postId, user);
     }
 }

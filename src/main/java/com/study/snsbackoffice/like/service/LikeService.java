@@ -22,9 +22,9 @@ public class LikeService {
     private final PostLikesRepository postLikesRepository;
     private final PostRepository postRepository;
 
-    public ResponseEntity<String> likePost(Long PostId, User user) {
+    public ResponseEntity<String> likePost(Long postId, User user) {
 
-        Post post = postRepository.findById(PostId).orElseThrow(
+        Post post = postRepository.findById(postId).orElseThrow(
                 () -> new GlobalCustomException(ExceptionType.NOT_EXIST_POST)
         );
 
@@ -41,4 +41,20 @@ public class LikeService {
         return new ResponseEntity<>(post.getTitle() + " 좋아요.", HttpStatus.OK);
     }
 
+    public ResponseEntity<String> deletePostLike(Long postId, User user) {
+        Post post = postRepository.findById(postId).orElseThrow(
+                () -> new GlobalCustomException(ExceptionType.NOT_EXIST_POST)
+        );
+
+
+
+        PostLikes postLikes = postLikesRepository.findByPostAndUser(post,user).orElseThrow(
+                () -> new GlobalCustomException(ExceptionType.NOT_EXIST_LIKE)
+        );
+
+        postLikesRepository.delete(postLikes);
+
+        return new ResponseEntity<>("좋아요 삭제 완료", HttpStatus.OK);
+
+    }
 }
