@@ -1,19 +1,19 @@
 package com.study.snsbackoffice.common.filter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.study.snsbackoffice.common.constant.ExceptionType;
 import com.study.snsbackoffice.common.exception.GlobalCustomException;
 import com.study.snsbackoffice.common.refreshToken.RefreshTokenService;
 import com.study.snsbackoffice.common.util.JwtUtil;
 import com.study.snsbackoffice.common.entity.RefreshToken;
 import com.study.snsbackoffice.user.entity.User;
-import com.study.snsbackoffice.user.entity.UserRoleEnum;
-import com.study.snsbackoffice.common.refreshToken.RefreshTokenRepository;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -23,7 +23,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Slf4j(topic = "JWT 검증 및 인가")
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
@@ -32,11 +32,14 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
 
+    private final ObjectMapper objectMapper;
+
     private final RefreshTokenService refreshTokenService;
 
-    public JwtAuthorizationFilter(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService, RefreshTokenService refreshTokenService) {
+    public JwtAuthorizationFilter(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService, ObjectMapper objectMapper, RefreshTokenService refreshTokenService) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
+        this.objectMapper = objectMapper;
         this.refreshTokenService = refreshTokenService;
     }
 
@@ -71,11 +74,15 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     setAuthentication(user.getUsername());
                 }
             }
+        } catch (GlobalCustomException e) {
+            res.setContentType("application/json; charset=UTF-8");
+            res.setStatus(e.getStatus().value());
+            res.getWriter().write(objectMapper.writeValueAsString(e.getMessage()));
+            return;
         } catch (Exception e) {
             log.error(e.getMessage());
         }
 
-        //인증 필요 url에서 setAuthentication 실패시 403
         filterChain.doFilter(req, res);
     }
 
@@ -90,7 +97,9 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     // 인증 객체 생성
     private Authentication createAuthentication(String username) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(username);
+        User user = userDetails.getUser();
+
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 
