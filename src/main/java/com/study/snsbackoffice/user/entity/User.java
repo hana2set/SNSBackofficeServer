@@ -3,6 +3,7 @@ package com.study.snsbackoffice.user.entity;
 import com.study.snsbackoffice.common.entity.Timestamped;
 import com.study.snsbackoffice.follow.entity.Follow;
 import com.study.snsbackoffice.common.util.StringListConverter;
+import com.study.snsbackoffice.like.entity.CommentLikes;
 import com.study.snsbackoffice.like.entity.PostLikes;
 import com.study.snsbackoffice.user.dto.AdminUserRequestDto;
 import com.study.snsbackoffice.user.dto.UserRequestDto;
@@ -73,6 +74,9 @@ public class User extends Timestamped {
 
     @OneToMany(mappedBy = "user")
     private List<PostLikes> postLikes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<CommentLikes> commentLikes = new ArrayList<>();
 
     public User(String username, String password, String email, String nickName) {
         this.username =  username;

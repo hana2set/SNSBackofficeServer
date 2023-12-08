@@ -1,6 +1,7 @@
 package com.study.snsbackoffice.post.entity;
 
 import com.study.snsbackoffice.common.entity.Timestamped;
+import com.study.snsbackoffice.like.entity.CommentLikes;
 import com.study.snsbackoffice.like.entity.PostLikes;
 import com.study.snsbackoffice.post.dto.PostRequestDto;
 import com.study.snsbackoffice.user.entity.User;

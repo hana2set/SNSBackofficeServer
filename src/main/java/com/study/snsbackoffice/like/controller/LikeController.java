@@ -32,4 +32,19 @@ public class LikeController {
         User user = userDetails.getUser();
         return likeService.deletePostLike(postId, user);
     }
+
+    @PostMapping("/comments/{commentId}/likes")
+    public ResponseEntity<String> likeComment(@PathVariable Long commentId,
+                                           @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        User user = userDetails.getUser();
+        return likeService.likeComment(commentId, user);
+    }
+
+    @DeleteMapping("/comments/{commentId}/likes")
+    public ResponseEntity<String> deleteCommentLike(@PathVariable Long commentId,
+                                                 @AuthenticationPrincipal UserDetailsImpl userDetails){
+        User user = userDetails.getUser();
+        return likeService.deleteCommentLike(commentId, user);
+    }
 }
