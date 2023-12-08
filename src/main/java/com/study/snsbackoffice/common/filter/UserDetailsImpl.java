@@ -50,10 +50,8 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        if (user.getIsBanned() == null) {
-            return true;
-        }
-        return !user.getIsBanned();
+        // 여기에 ban 정보 넣으면, exception 처리가 복잡해져서 제외
+        return true;
     }
 
     @Override
