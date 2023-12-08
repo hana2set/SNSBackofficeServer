@@ -3,6 +3,7 @@ package com.study.snsbackoffice.user.entity;
 import com.study.snsbackoffice.common.entity.Timestamped;
 import com.study.snsbackoffice.follow.entity.Follow;
 import com.study.snsbackoffice.common.util.StringListConverter;
+import com.study.snsbackoffice.like.entity.PostLikes;
 import com.study.snsbackoffice.user.dto.AdminUserRequestDto;
 import com.study.snsbackoffice.user.dto.UserRequestDto;
 import jakarta.persistence.*;
@@ -69,6 +70,9 @@ public class User extends Timestamped {
     private final int MAX_BEFORE_PASSWORD_SIZE = 4;
 
     private Long kakaoId;
+
+    @OneToMany(mappedBy = "user")
+    private List<PostLikes> postLikes = new ArrayList<>();
 
     public User(String username, String password, String email, String nickName) {
         this.username =  username;
