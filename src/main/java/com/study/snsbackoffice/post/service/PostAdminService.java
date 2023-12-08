@@ -1,5 +1,7 @@
 package com.study.snsbackoffice.post.service;
 
+import com.study.snsbackoffice.common.constant.ExceptionType;
+import com.study.snsbackoffice.common.exception.GlobalCustomException;
 import com.study.snsbackoffice.post.dto.PostRequestDto;
 import com.study.snsbackoffice.post.dto.PostResponseDto;
 import com.study.snsbackoffice.post.entity.Post;
@@ -41,7 +43,7 @@ public class PostAdminService {
 
     private Post findPost(Long id) {
         return postRepository.findById(id).orElseThrow(() ->
-                new NullPointerException("포스트가 존재하지 않습니다.")
+                new GlobalCustomException(ExceptionType.NOT_EXIST_POST)
         );
     }
 }

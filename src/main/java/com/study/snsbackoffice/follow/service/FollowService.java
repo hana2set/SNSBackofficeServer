@@ -76,7 +76,7 @@ public class FollowService {
 
     private User findUser(Long userId){
         return userRepository.findById(userId).orElseThrow(() ->
-                new GlobalCustomException(ExceptionType.NOT_EXIST_USER)
+                new GlobalCustomException(ExceptionType.NOT_EXIST_USER, userId.toString())
         );
     }
 }

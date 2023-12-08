@@ -4,6 +4,8 @@ import com.study.snsbackoffice.comment.dto.CommentRequestDto;
 import com.study.snsbackoffice.comment.dto.CommentResponseDto;
 import com.study.snsbackoffice.comment.entity.Comment;
 import com.study.snsbackoffice.comment.repository.CommentRepository;
+import com.study.snsbackoffice.common.constant.ExceptionType;
+import com.study.snsbackoffice.common.exception.GlobalCustomException;
 import com.study.snsbackoffice.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,7 +36,7 @@ public class CommentAdminService {
 
     private Comment findComment(Long id) {
         return commentRepository.findById(id).orElseThrow(() ->
-                new NullPointerException("댓글이 존재하지 않습니다.")
+                new GlobalCustomException(ExceptionType.NOT_EXIST_COMMENT)
         );
     }
 }

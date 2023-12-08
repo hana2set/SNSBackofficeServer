@@ -24,22 +24,20 @@ public enum ExceptionType {
     BAN_USER(HttpStatus.FORBIDDEN, "차단된 사용자입니다. 관리자에게 문의해주세요."),
     BAN_USER_TEMP(HttpStatus.FORBIDDEN, "일시적으로 접근이 제한된 사용자입니다. {0} 이후에 시도해주세요."),
 
-  
     REFRESH_TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "만료된 토큰입니다. 재인증이 필요합니다."),
     REFRESH_TOKEN_NOT_EXIST(HttpStatus.UNAUTHORIZED, "토큰 정보가 없습니다."),
   
-  
     SELF_FOLLOW(HttpStatus.BAD_REQUEST, "자기 자신을 팔로우 할 수 없습니다."),
     ALREADY_FOLLOW(HttpStatus.BAD_REQUEST, "이미 팔로우 한 사용자입니다."),
-    NOT_EXIST_FOLLOW(HttpStatus.BAD_REQUEST, "팔로우 한 기록이 없습니다.")
+    NOT_EXIST_FOLLOW(HttpStatus.BAD_REQUEST, "팔로우 한 기록이 없습니다."),
 
+    NOT_EXIST_POST(HttpStatus.BAD_REQUEST, "포스트가 존재하지 않습니다."),
+    ONLY_AUTHOR_ACCESS(HttpStatus.BAD_REQUEST, "작성자만 수정/삭제 가능합니다."),
+
+    NOT_EXIST_COMMENT(HttpStatus.BAD_REQUEST, "댓글이 존재하지 않습니다.")
     ;
-
-
 
 
     private final HttpStatus status;
     private final String message;
-
-
 }
