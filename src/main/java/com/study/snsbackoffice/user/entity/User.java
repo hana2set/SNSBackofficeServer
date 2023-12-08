@@ -1,6 +1,7 @@
 package com.study.snsbackoffice.user.entity;
 
 import com.study.snsbackoffice.common.entity.Timestamped;
+import com.study.snsbackoffice.follow.entity.Follow;
 import com.study.snsbackoffice.common.util.StringListConverter;
 import com.study.snsbackoffice.user.dto.AdminUserRequestDto;
 import com.study.snsbackoffice.user.dto.UserRequestDto;
@@ -49,6 +50,12 @@ public class User extends Timestamped {
 
     @Convert(converter = StringListConverter.class)
     private List<String> beforePassword = new ArrayList<>(); // 지금 암호 + 기존 3개암호
+
+    @OneToMany(mappedBy = "following")
+    private List<Follow> followerList;
+
+    @OneToMany(mappedBy = "follower")
+    private List<Follow> followingList;
 
     @Column(nullable = false)
     @NotNull
