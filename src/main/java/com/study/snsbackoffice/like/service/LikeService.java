@@ -28,6 +28,11 @@ public class LikeService {
                 () -> new GlobalCustomException(ExceptionType.NOT_EXIST_POST)
         );
 
+        // 글 작성자와 같은 유저라면 좋아요 불가
+        if(post.getUser().getId().equals(user.getId())){
+            throw new GlobalCustomException(ExceptionType.SAME_USER);
+        }
+
         if(postLikesRepository.findByPostAndUser(post,user).isPresent()){
             throw new GlobalCustomException(ExceptionType.ALREADY_EXIST_LIKE);
         }
