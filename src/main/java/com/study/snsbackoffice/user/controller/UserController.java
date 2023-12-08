@@ -27,7 +27,7 @@ public class UserController {
     @DeleteMapping("/users/logout")
     public ResponseEntity logout(@AuthenticationPrincipal UserDetailsImpl userDetails){
         refreshTokenService.deleteByUserId(userDetails.getUser());
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/users")

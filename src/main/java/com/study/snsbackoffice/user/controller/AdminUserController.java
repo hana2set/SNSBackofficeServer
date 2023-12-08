@@ -41,7 +41,7 @@ public class AdminUserController {
     @DeleteMapping("/users/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         adminUserService.delete(id);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/users/{id}/ban")
