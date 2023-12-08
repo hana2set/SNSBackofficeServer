@@ -5,6 +5,7 @@ import com.study.snsbackoffice.user.entity.User;
 import com.study.snsbackoffice.user.service.AdminUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,14 +33,15 @@ public class AdminUserController {
         return adminUserService.getUserlist();
     }
 
-    @PutMapping("/users/{id}")
+    @PatchMapping("/users/{id}")
     public AdminUserResponseDto update(@PathVariable Long id, @RequestBody @Valid AdminUserRequestDto requestDto){
         return  adminUserService.update(id, requestDto);
     }
 
     @DeleteMapping("/users/{id}")
-    public Long delete(@PathVariable Long id){
-        return adminUserService.delete(id);
+    public ResponseEntity delete(@PathVariable Long id){
+        adminUserService.delete(id);
+        return ResponseEntity.accepted().build();
     }
 
     @PatchMapping("/users/{id}/ban")
