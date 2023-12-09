@@ -1,9 +1,14 @@
 package com.study.snsbackoffice.user.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.study.snsbackoffice.common.filter.UserDetailsImpl;
 import com.study.snsbackoffice.common.refreshToken.RefreshTokenService;
+import com.study.snsbackoffice.common.util.JwtUtil;
 import com.study.snsbackoffice.user.dto.*;
+import com.study.snsbackoffice.user.service.KakaoService;
 import com.study.snsbackoffice.user.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +23,7 @@ public class UserController {
 
     private final UserService userService;
     private final RefreshTokenService refreshTokenService;
+    private final KakaoService kakaoService;
 
     @PostMapping("/users/signup")
     public SignupResponseDto signup(@Valid @RequestBody SignupRequestDto requestDto, BindingResult bindingResult){
@@ -48,5 +54,20 @@ public class UserController {
     @PatchMapping("/users/add-description")
     public DescriptionResponseDto addDescription(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody DescriptionRequestDto requestDto){
         return userService.addDescriptionUser(userDetails.getUser(), requestDto);
+    }
+
+    @GetMapping("/users/kakao/callback")
+    public String kakaoLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
+        String[] token = kakaoService.kakaoLogin(code);
+
+        Cookie accessCookie = new Cookie(JwtUtil.ACCESS_TOKEN_HEADER, token[0].substring(7));
+        accessCookie.setPath("/");
+        response.addCookie(accessCookie);
+
+        Cookie refreshCookie = new Cookie(JwtUtil.REFRESH_TOKEN_HEADER, token[1].substring(7));
+        refreshCookie.setPath("/");
+        response.addCookie(refreshCookie);
+        return "redirect:/";
+
     }
 }
