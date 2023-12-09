@@ -11,7 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AdminUserRequestDto {
-    @NotBlank
     @Size(min=8, max=15)
     @Pattern(regexp = "^[a-zA-Z0-9`~!@#$%^&*()\\-_=+\\|\\[\\]{};:'\",.<>/?]*")
     private String password;
