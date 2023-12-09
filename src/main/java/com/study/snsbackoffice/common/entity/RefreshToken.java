@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -21,8 +23,9 @@ public class RefreshToken {
     @Column(nullable = false)
     private String token;
 
-    @OneToOne
-    @JoinColumn(name="user_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name="user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @Column(nullable = false)

@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
  * {@code GlobalCustomException} 파라미터용 예외 처리 모음 상수 <p>
  *
  * 메세지에 변수 추가 시 <string>{number}</string>로 표기. <p>
- * map으로 처리할 경우 - <string>{variable}</string>로 표기. (미구현) <p>
+ * map 으로 처리할 경우 - <string>{variable}</string>로 표기. (미구현) <p>
  * 다국어 - message 대신 type Code 추가 후 DB에 넣어서 조회? (미구현)
 * */
 @Getter
@@ -22,6 +22,7 @@ public enum ExceptionType {
     NOT_EXIST_USER(HttpStatus.NOT_FOUND, "존재하지 않는 회원 번호입니다.: {0}"),
     DUPLICATE_USER(HttpStatus.BAD_REQUEST, "중복된 사용자가 존재합니다."),
     DUPLICATE_EMAIL(HttpStatus.BAD_REQUEST, "중복된 Email 입니다."),
+    CANNOT_DELETE_ONESELF(HttpStatus.BAD_REQUEST, "자신의 계정은 삭제할 수 없습니다."),
     BAN_USER(HttpStatus.FORBIDDEN, "차단된 사용자입니다. 관리자에게 문의해주세요."),
     BAN_USER_TEMP(HttpStatus.FORBIDDEN, "일시적으로 접근이 제한된 사용자입니다. {0} 이후에 시도해주세요."),
     LOGIN_FAIL(HttpStatus.UNAUTHORIZED, "로그인에 실패하였습니다."),

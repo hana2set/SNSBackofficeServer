@@ -32,14 +32,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
 
-    private final ObjectMapper objectMapper;
 
     private final RefreshTokenService refreshTokenService;
 
-    public JwtAuthorizationFilter(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService, ObjectMapper objectMapper, RefreshTokenService refreshTokenService) {
+    public JwtAuthorizationFilter(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService, RefreshTokenService refreshTokenService) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
-        this.objectMapper = objectMapper;
         this.refreshTokenService = refreshTokenService;
     }
 
@@ -77,7 +75,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         } catch (GlobalCustomException e) {
             res.setContentType("application/json; charset=UTF-8");
             res.setStatus(e.getStatus().value());
-            res.getWriter().write(objectMapper.writeValueAsString(e.getMessage()));
+            res.getWriter().write(e.getMessage());
             return;
         } catch (Exception e) {
             log.error(e.getMessage());
