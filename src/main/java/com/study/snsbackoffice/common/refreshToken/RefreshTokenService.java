@@ -24,7 +24,6 @@ import java.util.UUID;
 @Service
 public class RefreshTokenService {
     private final RefreshTokenRepository refreshTokenRepository;
-    private final UserRepository userRepository;
 
     // Refresh Token 만료시간
     @Value("${jwt.secret.refresh_token_expiry_ms}")
