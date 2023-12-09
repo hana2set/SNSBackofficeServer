@@ -19,7 +19,6 @@ public class AdminUserResponseDto extends Timestamped {
     private String description;
     private Long loginFailCount;
     private Boolean isBanned;
-    private List<String> beforePassword;
     private UserRoleEnum role;
 
 
@@ -30,7 +29,6 @@ public class AdminUserResponseDto extends Timestamped {
         this.description = user.getDesc();
         this.loginFailCount = user.getLoginFailCount();
         this.isBanned = user.getIsBanned();
-        this.beforePassword = user.getBeforePassword();
         this.role = user.getRole();
     }
 }

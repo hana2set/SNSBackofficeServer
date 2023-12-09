@@ -23,9 +23,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Transactional
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, GlobalCustomException {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Not Found " + username));
+                .orElseThrow(() -> new UsernameNotFoundException(ExceptionType.NOT_EXIST_TOKEN_USERNAME + ":" + username));
 
         if (user.getIsBanned() != null && user.getIsBanned() == true) {
             if (user.getUnbannedAt() == null) {
@@ -38,7 +38,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 throw new GlobalCustomException(ExceptionType.BAN_USER_TEMP, user.getUnbannedAt().toString());
             }
         }
-
 
         return new UserDetailsImpl(user);
     }

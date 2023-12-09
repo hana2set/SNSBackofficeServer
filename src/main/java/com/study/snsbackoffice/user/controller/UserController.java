@@ -11,6 +11,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +31,9 @@ public class UserController {
     }
 
     @DeleteMapping("/users/logout")
-    public int logout(@AuthenticationPrincipal UserDetailsImpl userDetails){
-        return refreshTokenService.deleteByUserId(userDetails.getUser());
+    public ResponseEntity logout(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        refreshTokenService.deleteByUserId(userDetails.getUser());
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/users")
