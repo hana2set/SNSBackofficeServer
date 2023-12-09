@@ -1,5 +1,7 @@
 package com.study.snsbackoffice.post.service;
 
+import com.study.snsbackoffice.common.constant.ExceptionType;
+import com.study.snsbackoffice.common.exception.GlobalCustomException;
 import com.study.snsbackoffice.post.dto.PostRequestDto;
 import com.study.snsbackoffice.post.dto.PostResponseDto;
 import com.study.snsbackoffice.post.entity.Post;
@@ -46,7 +48,7 @@ public class PostService {
     public PostResponseDto updatePost(User user, Long id, PostRequestDto postRequestDto) {
         Post post = findPost(id);
         if(!user.getId().equals(post.getUser().getId())){
-            throw new IllegalArgumentException("일치하지 않는 유저입니다.");
+            throw new GlobalCustomException(ExceptionType.ONLY_AUTHOR_ACCESS);
         }
         post.update(postRequestDto);
         return new PostResponseDto(post);
@@ -55,7 +57,7 @@ public class PostService {
     public ResponseEntity<String> deletePost(User user, Long postId) {
         Post post = findPost(postId);
         if(!user.getId().equals(post.getUser().getId())){
-            throw new IllegalArgumentException("일치하지 않는 유저입니다.");
+            throw new GlobalCustomException(ExceptionType.ONLY_AUTHOR_ACCESS);
         }
         postRepository.delete(post);
         return new ResponseEntity<>("게시글이 삭제되었습니다.", HttpStatus.OK);
@@ -63,7 +65,7 @@ public class PostService {
 
     private Post findPost(Long id) {
         return postRepository.findById(id).orElseThrow(() ->
-                new NullPointerException("포스트가 존재하지 않습니다.")
+                new GlobalCustomException(ExceptionType.NOT_EXIST_POST)
         );
     }
 }

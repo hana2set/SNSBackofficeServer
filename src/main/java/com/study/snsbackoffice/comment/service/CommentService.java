@@ -4,6 +4,8 @@ import com.study.snsbackoffice.comment.dto.CommentRequestDto;
 import com.study.snsbackoffice.comment.dto.CommentResponseDto;
 import com.study.snsbackoffice.comment.entity.Comment;
 import com.study.snsbackoffice.comment.repository.CommentRepository;
+import com.study.snsbackoffice.common.constant.ExceptionType;
+import com.study.snsbackoffice.common.exception.GlobalCustomException;
 import com.study.snsbackoffice.post.entity.Post;
 import com.study.snsbackoffice.post.repository.PostRepository;
 import com.study.snsbackoffice.user.entity.User;
@@ -31,10 +33,11 @@ public class CommentService {
     @Transactional
     public CommentResponseDto createComment(CommentRequestDto requestDto, User user) {
         if (requestDto.getPostId() == null) {
-            throw new IllegalIdentifierException("게시글를 선택해주세요.");
+            throw new GlobalCustomException(ExceptionType.NOT_EXIST_POST);
         }
 
-        Post post = postRepository.findById(requestDto.getPostId()).orElseThrow(() -> new IllegalIdentifierException("선택한 게시글은 존재하지 않습니다."));
+        Post post = postRepository.findById(requestDto.getPostId()).orElseThrow(() ->
+                new GlobalCustomException(ExceptionType.NOT_EXIST_POST));
         Comment saveComment = new Comment(requestDto, user, post);
 
         commentRepository.save(saveComment);
@@ -71,7 +74,7 @@ public class CommentService {
 
     private void checkUser(User user, Comment comment) {
         if(!user.getId().equals(comment.getUser().getId())){
-            throw new IllegalArgumentException("작성자만 삭제/수정 할 수 있습니다.");
+            throw new GlobalCustomException(ExceptionType.ONLY_AUTHOR_ACCESS);
         }
     }
 }

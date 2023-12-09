@@ -1,12 +1,17 @@
 package com.study.snsbackoffice.post.entity;
 
 import com.study.snsbackoffice.common.entity.Timestamped;
+import com.study.snsbackoffice.like.entity.CommentLikes;
+import com.study.snsbackoffice.like.entity.PostLikes;
 import com.study.snsbackoffice.post.dto.PostRequestDto;
 import com.study.snsbackoffice.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,6 +37,9 @@ public class Post extends Timestamped {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @OneToMany(mappedBy = "post")
+    private List<PostLikes> postLikes = new ArrayList<>();
+
     public Post(User user, PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
@@ -46,4 +54,6 @@ public class Post extends Timestamped {
     public void noticePost(){
         this.notice = true;
     }
+
+
 }

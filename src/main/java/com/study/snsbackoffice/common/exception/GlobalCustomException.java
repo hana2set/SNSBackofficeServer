@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Map;
 
-
 /**
  * 공통 예외처리를 위한 커스텀 예외. <p>
  * 기본적으로 {@code ExceptionType}를 매개변수로 받아 해당하는 {@code HttpStatus}와 메세지를 RuntimeException으로 반환하도록 구성됨 <p>
