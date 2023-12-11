@@ -62,7 +62,11 @@ SNS 백오피스 서버 구현 연습
   </details>
   
 ### API 명세
-    https://documenter.getpostman.com/view/30923517/2s9YeLYUeT 
+https://documenter.getpostman.com/view/30923517/2s9YeLYUeT 
+* 미리보기
+![image](https://github.com/hana2set/SNSBackofficeServer/assets/97689567/85852ad0-4586-474c-ac5c-79d3692d0521)
+
+
     
 ### ERD 설계
 
@@ -78,4 +82,5 @@ SNS 백오피스 서버 구현 연습
 
 
 ### 와이어프레임
-    ![Untitled](https://github.com/hana2set/SNSBackofficeServer/assets/97689567/356e685c-2373-4e27-9926-8f884fe11c49)
+
+![Untitled](https://github.com/hana2set/SNSBackofficeServer/assets/97689567/356e685c-2373-4e27-9926-8f884fe11c49)
