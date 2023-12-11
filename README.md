@@ -62,7 +62,8 @@ SNS 백오피스 서버 구현 연습
   </details>
   
 ### API 명세
-https://documenter.getpostman.com/view/30923517/2s9YeLYUeT 
+[postman API document](https://documenter.getpostman.com/view/30923517/2s9YeLYUeT)   
+[postman collection 파일](https://github.com/hana2set/SNSBackofficeServer/blob/main/SNS%20%EB%B0%B1%EC%97%94%EB%93%9C%20%EC%84%9C%EB%B2%84.postman_collection.json)
 * 미리보기
 ![image](https://github.com/hana2set/SNSBackofficeServer/assets/97689567/85852ad0-4586-474c-ac5c-79d3692d0521)
 
