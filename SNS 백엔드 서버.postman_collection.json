@@ -1,0 +1,7401 @@
+{
+	"info": {
+		"_postman_id": "298503ff-63f5-4dfb-a952-255a85f22d12",
+		"name": "SNS 백엔드 서버",
+		"description": "- 스프링 백오피스 서버 구현\n    \n- 관리자 페이지는 ADMIN인 계정만 접근이 가능하고, 권한 없을 시 403 예외 발생\n    \n- 일반 페이지는 몇 가지 필수 API를 제외하고 로그인이 되어있어야 조회 가능. 로그인 토큰이 없을 경우 403 예외 발생",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30923517",
+		"_collection_link": "https://bold-satellite-784637.postman.co/workspace/Spring-%EB%B0%B1%EC%98%A4%ED%94%BC%EC%8A%A4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8~474b7b7f-cb73-462c-8b20-2787ef2cc651/collection/30923517-298503ff-63f5-4dfb-a952-255a85f22d12?action=share&source=collection_link&creator=30923517"
+	},
+	"item": [
+		{
+			"name": "유저",
+			"item": [
+				{
+					"name": "관리자",
+					"item": [
+						{
+							"name": "관리자_회원 생성",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\": \"asdfasdf\",\r\n    \"email\" : \"admin123@email.com\",\r\n    \"nickname\" : \"nickname\",\r\n    \"admin\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/admin/users/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"users",
+										"signup"
+									]
+								},
+								"description": "- 관리자가 회원을 생성한다.\n- 회원가입API와 다르게 ADMIN여부 설정 가능\n    \n\nresponse\n\n- 성공 - code: 200, body: {userId: userId}\n- 실패\n    \n    - Request Validation 에러 - code: 400, body: ${에러 필드} 필드 : ${에러 이유}"
+							},
+							"response": [
+								{
+									"name": "성공",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjA5MTg5NiwiaWF0IjoxNzAyMDg4Mjk2fQ.UL-2EQeEeHs87lHHfgyawJZeRVqEYG4abTeuFO7XOKA",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\": \"asdfasdf\",\r\n    \"email\" : \"admin123@email.com\",\r\n    \"nickname\" : \"nickname\",\r\n    \"admin\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/signup",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"signup"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:21:09 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"userId\": 3\n}"
+								},
+								{
+									"name": "실패_ADMIN 계정이 아닐경우",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjA5MTg5NiwiaWF0IjoxNzAyMDg4Mjk2fQ.UL-2EQeEeHs87lHHfgyawJZeRVqEYG4abTeuFO7XOKA",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\": \"asdfasdf\",\r\n    \"email\" : \"admin123@email.com\",\r\n    \"nickname\" : \"nickname\",\r\n    \"admin\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/signup",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"signup"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=ISO-8859-1"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:19:50 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"timestamp\": \"2023-12-09T02:19:50.770+00:00\",\n    \"status\": 404,\n    \"error\": \"Not Found\",\n    \"path\": \"/api/admin/users/signup\"\n}"
+								},
+								{
+									"name": "실패_중복 사용자가 있을 경우",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjA5MTg5NiwiaWF0IjoxNzAyMDg4Mjk2fQ.UL-2EQeEeHs87lHHfgyawJZeRVqEYG4abTeuFO7XOKA",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\": \"asdfasdf\",\r\n    \"email\" : \"admin123@email.com\",\r\n    \"nickname\" : \"nickname\",\r\n    \"admin\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/signup",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"signup"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "39"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:21:37 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "중복된 사용자가 존재합니다."
+								},
+								{
+									"name": "실패_형식에 문제가 있을 경우",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjA5MTg5NiwiaWF0IjoxNzAyMDg4Mjk2fQ.UL-2EQeEeHs87lHHfgyawJZeRVqEYG4abTeuFO7XOKA",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\" : \"admin\",\r\n    \"password\": \"asdfasdf\",\r\n    \"email\" : \"il.com\",\r\n    \"nickname\" : \"nickname\",\r\n    \"admin\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/signup",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"signup"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "67"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:22:36 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "email 필드 : 올바른 형식의 이메일 주소여야 합니다"
+								}
+							]
+						},
+						{
+							"name": "관리자_회원정보 조회",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/admin/users/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"users",
+										"1"
+									]
+								},
+								"description": "- 입력한 ID에 해당하는 유저의 회원정보를 반환한다.\n    \n\nresponse\n\n- 성공 -  \n    code: 200,  \n    body: { username, email, nickname, description, loginFailCount, isBanned, beforePassword, role }\n- 실패 (회원 번호 없음) - code: 404, body: 존재하지 않는 회원 번호입니다.: ${userId}"
+							},
+							"response": [
+								{
+									"name": "성공",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:31:48 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"username\": \"robbie\",\n    \"email\": \"robbie@email.com\",\n    \"nickname\": \"로비스트\",\n    \"description\": null,\n    \"loginFailCount\": 0,\n    \"isBanned\": false,\n    \"role\": \"USER\",\n    \"createdAt\": \"2023-12-09T11:17:19.817026\",\n    \"modifiedAt\": \"2023-12-09T11:17:19.888999\"\n}"
+								},
+								{
+									"name": "실패_존재하지 않는 회원번호",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/2",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"2"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "46"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:32:14 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "존재하지 않는 회원 번호입니다.: 2"
+								}
+							]
+						},
+						{
+							"name": "관리자_회원정보 전체 조회",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/admin/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"users"
+									]
+								},
+								"description": "- 관리자가 등록된 게시글 전체를 조회\n    \n\nresponse\n\n- 성공 - code:200, body: \\[ { userDto }, ... \\]"
+							},
+							"response": [
+								{
+									"name": "성공",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:32:53 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"username\": \"robbie\",\n        \"email\": \"robbie@email.com\",\n        \"nickname\": \"로비스트\",\n        \"description\": null,\n        \"loginFailCount\": 0,\n        \"isBanned\": false,\n        \"role\": \"USER\",\n        \"createdAt\": \"2023-12-09T11:17:19.817026\",\n        \"modifiedAt\": \"2023-12-09T11:17:19.888999\"\n    },\n    {\n        \"username\": \"admin\",\n        \"email\": \"admin123@email.com\",\n        \"nickname\": \"nickname\",\n        \"description\": null,\n        \"loginFailCount\": 0,\n        \"isBanned\": false,\n        \"role\": \"ADMIN\",\n        \"createdAt\": \"2023-12-09T11:21:09.073529\",\n        \"modifiedAt\": \"2023-12-09T11:21:09.076529\"\n    }\n]"
+								}
+							]
+						},
+						{
+							"name": "관리자_회원 정보 수정",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nickname\" : \"수정 닉네임\",\n    \"email\" : \"수정@이메일.형식\",\n    \"description\" : \"수정 설명\",\n    \"role\":  \"USER\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/admin/users/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"users",
+										"1"
+									]
+								},
+								"description": "- 관리자가 회원 정보를 수정\n    \n\nresponse\n\n- 성공 - code:200, body: { userDto }\n- 실패\n    \n    - 회원 번호 없음 - code: 404, body: 존재하지 않는 회원 번호입니다.: ${userId}\n        \n    - 이메일 중복 - code: 400, body: 중복된 Email 입니다."
+							},
+							"response": [
+								{
+									"name": "성공",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nickname\" : \"수정 닉네임\",\n    \"email\" : \"admsin@admin.email\",\n    \"description\" : \"수정 설명\",\n    \"role\":  \"USER\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:43:00 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"username\": \"robbie\",\n    \"email\": \"admsin@admin.email\",\n    \"nickname\": \"수정 닉네임\",\n    \"description\": \"수정 설명\",\n    \"loginFailCount\": 0,\n    \"isBanned\": false,\n    \"role\": \"USER\",\n    \"createdAt\": \"2023-12-09T11:17:19.817026\",\n    \"modifiedAt\": \"2023-12-09T11:17:19.888999\"\n}"
+								},
+								{
+									"name": "실패_중복여부 검출",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nickname\" : \"수정 닉네임\",\n    \"email\" : \"수정@이메일.형식\",\n    \"description\" : \"수정 설명\",\n    \"role\":  \"USER\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"1"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "26"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:39:25 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "중복된 Email 입니다."
+								},
+								{
+									"name": "실패_형식이 잘못됨",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"nickname\" : \"수정 닉네임\",\n    \"password\": \"test\",\n    \"email\" : \"admsin@admin.email\",\n    \"description\" : \"수정 설명\",\n    \"role\":  \"USER\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"1"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "61"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:45:23 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "password 필드 : 크기가 8에서 15 사이여야 합니다"
+								}
+							]
+						},
+						{
+							"name": "관리자_회원 삭제",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/admin/users/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"users",
+										"4"
+									]
+								},
+								"description": "- 관리자가 회원을 삭제\n    \n\nresponse\n\n- 성공 - code:204"
+							},
+							"response": [
+								{
+									"name": "성공",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"1"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 03:09:10 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": null
+								},
+								{
+									"name": "실패_회원번호 없음",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/2",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"2"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "46"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:52:43 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "존재하지 않는 회원 번호입니다.: 2"
+								},
+								{
+									"name": "실패_자신의 계정",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"3"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "47"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 02:53:03 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "자신의 계정은 삭제할 수 없습니다."
+								}
+							]
+						},
+						{
+							"name": "관리자_회원 차단",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/admin/users/1/ban",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"users",
+										"1",
+										"ban"
+									]
+								},
+								"description": "- 관리자가 회원을 차단\n- 차단된 유저가 도메인에 접근한 경우, 403으로 \"차단된 사용자입니다. 관리자에게 문의해주세요.\" 라고 출력됨\n    \n\nresponse\n\n- 성공 - code: 200, body: 해당 유저가 차단되었습니다: ${username}\n- 실패 - code: 404, body: 존재하지 않는 회원 번호입니다.: ${userId}"
+							},
+							"response": [
+								{
+									"name": "성공",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/5/ban",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"5",
+												"ban"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "46"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 06:58:37 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "해당 유저가 차단되었습니다: robbie"
+								},
+								{
+									"name": "실패_회원번호 없음",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/admin/users/8/ban",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"8",
+												"ban"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "46"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 06:58:55 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "존재하지 않는 회원 번호입니다.: 8"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "팔로우",
+					"item": [
+						{
+							"name": "팔로우",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMTk0NjkzMywiaWF0IjoxNzAxOTQzMzMzfQ.dS8nez2wSvudf5mwNjvdr7IeiXRNe9kNZwFBu1L_lfw",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwNDUzNTMzMywiaWF0IjoxNzAxOTQzMzMzfQ.2mLGG-aPZ1rhYhrznTnqi1OJqYz_6nYNHG9mfVjNmy8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/users/1/follow",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"1",
+										"follow"
+									]
+								},
+								"description": "- 선택 유저를 팔로우\n    \n\nresponse\n\n- 성공 - code: 200, body: {user_nickname}님을 팔로우하였습니다.\n- 실패\n    - 자기자신 선택 - code: 400, body: 자기 자신을 팔로우 할 수 없습니다.\n    - 중복 - code: 400, body: 이미 팔로우 한 사용자입니다."
+							},
+							"response": [
+								{
+									"name": "성공",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjA0MTU4MywiaWF0IjoxNzAyMDM3OTgzfQ.oGevsxY5jutEIuk-TN5AmqsE1k53wrT_mMF6h20f8EM",
+												"type": "text"
+											},
+											{
+												"key": "RefreshToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwNDUzNTMzMywiaWF0IjoxNzAxOTQzMzMzfQ.2mLGG-aPZ1rhYhrznTnqi1OJqYz_6nYNHG9mfVjNmy8",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/users/3/follow",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"3",
+												"follow"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "41"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 08 Dec 2023 12:28:56 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "홍길동님을 팔로우하였습니다."
+								},
+								{
+									"name": "실패_이미 팔로우함",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjA0MTU4MywiaWF0IjoxNzAyMDM3OTgzfQ.oGevsxY5jutEIuk-TN5AmqsE1k53wrT_mMF6h20f8EM",
+												"type": "text"
+											},
+											{
+												"key": "RefreshToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwNDUzNTMzMywiaWF0IjoxNzAxOTQzMzMzfQ.2mLGG-aPZ1rhYhrznTnqi1OJqYz_6nYNHG9mfVjNmy8",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/users/3/follow",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"3",
+												"follow"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "40"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 08 Dec 2023 12:23:51 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "이미 팔로우 한 사용자입니다."
+								},
+								{
+									"name": "실패_셀프 팔로우",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjA0MTU4MywiaWF0IjoxNzAyMDM3OTgzfQ.oGevsxY5jutEIuk-TN5AmqsE1k53wrT_mMF6h20f8EM",
+												"type": "text"
+											},
+											{
+												"key": "RefreshToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwNDUzNTMzMywiaWF0IjoxNzAxOTQzMzMzfQ.2mLGG-aPZ1rhYhrznTnqi1OJqYz_6nYNHG9mfVjNmy8",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/users/2/follow",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"2",
+												"follow"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "48"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 08 Dec 2023 12:26:01 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "자기 자신을 팔로우 할 수 없습니다."
+								}
+							]
+						},
+						{
+							"name": "언팔로우",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMTk0NjkzMywiaWF0IjoxNzAxOTQzMzMzfQ.dS8nez2wSvudf5mwNjvdr7IeiXRNe9kNZwFBu1L_lfw",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwNDUzNTMzMywiaWF0IjoxNzAxOTQzMzMzfQ.2mLGG-aPZ1rhYhrznTnqi1OJqYz_6nYNHG9mfVjNmy8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/users/1/follow",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"1",
+										"follow"
+									]
+								},
+								"description": "- 선택한 유저에 대한 팔로우를 삭제\n    \n\nresponse\n\n- 성공 - code: 200, body: {user_nickname}님을 팔로우 취소하였습니다.\n    \n- 실패 - code:400, body: 팔로우 한 기록이 없습니다."
+							},
+							"response": [
+								{
+									"name": "성공",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjA0MTU4MywiaWF0IjoxNzAyMDM3OTgzfQ.oGevsxY5jutEIuk-TN5AmqsE1k53wrT_mMF6h20f8EM",
+												"type": "text"
+											},
+											{
+												"key": "RefreshToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwNDUzNTMzMywiaWF0IjoxNzAxOTQzMzMzfQ.2mLGG-aPZ1rhYhrznTnqi1OJqYz_6nYNHG9mfVjNmy8",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/users/3/follow",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"3",
+												"follow"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "48"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 08 Dec 2023 12:28:29 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "홍길동님을 팔로우 취소하였습니다."
+								},
+								{
+									"name": "실패_팔로우 기록 없음",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjA0MTU4MywiaWF0IjoxNzAyMDM3OTgzfQ.oGevsxY5jutEIuk-TN5AmqsE1k53wrT_mMF6h20f8EM",
+												"type": "text"
+											},
+											{
+												"key": "RefreshToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwNDUzNTMzMywiaWF0IjoxNzAxOTQzMzMzfQ.2mLGG-aPZ1rhYhrznTnqi1OJqYz_6nYNHG9mfVjNmy8",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/users/4/follow",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"4",
+												"follow"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "37"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 08 Dec 2023 12:42:41 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "팔로우 한 기록이 없습니다."
+								}
+							]
+						},
+						{
+							"name": "팔로잉 목록 조회",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMTk0NjkzMywiaWF0IjoxNzAxOTQzMzMzfQ.dS8nez2wSvudf5mwNjvdr7IeiXRNe9kNZwFBu1L_lfw",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwNDUzNTMzMywiaWF0IjoxNzAxOTQzMzMzfQ.2mLGG-aPZ1rhYhrznTnqi1OJqYz_6nYNHG9mfVjNmy8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/users/2/following",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"2",
+										"following"
+									]
+								},
+								"description": "- 팔로우한 유저를 조회\n    \n\nresponse\n\n- 성공 - code: 200, body: \\[{팔로우 정보}, ...\\]"
+							},
+							"response": [
+								{
+									"name": "팔로잉 목록 조회",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMTk0NjkzMywiaWF0IjoxNzAxOTQzMzMzfQ.dS8nez2wSvudf5mwNjvdr7IeiXRNe9kNZwFBu1L_lfw",
+												"type": "text"
+											},
+											{
+												"key": "RefreshToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwNDUzNTMzMywiaWF0IjoxNzAxOTQzMzMzfQ.2mLGG-aPZ1rhYhrznTnqi1OJqYz_6nYNHG9mfVjNmy8",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/users/2/following",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"2",
+												"following"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 08 Dec 2023 12:45:46 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"followingList\": [\n        \"nickname\",\n        \"홍길동\"\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "팔로워 목록 조회",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMTk0NjkzMywiaWF0IjoxNzAxOTQzMzMzfQ.dS8nez2wSvudf5mwNjvdr7IeiXRNe9kNZwFBu1L_lfw",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwNDUzNTMzMywiaWF0IjoxNzAxOTQzMzMzfQ.2mLGG-aPZ1rhYhrznTnqi1OJqYz_6nYNHG9mfVjNmy8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/users/2/follower",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"2",
+										"follower"
+									]
+								},
+								"description": "- 자신을 팔로우한 유저를 조회\n    \n\nresponse\n\n- 성공 - code: 200, body: \\[{팔로워 정보}, ...\\]"
+							},
+							"response": [
+								{
+									"name": "팔로워 목록 조회",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMTk0NjkzMywiaWF0IjoxNzAxOTQzMzMzfQ.dS8nez2wSvudf5mwNjvdr7IeiXRNe9kNZwFBu1L_lfw",
+												"type": "text"
+											},
+											{
+												"key": "RefreshToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwNDUzNTMzMywiaWF0IjoxNzAxOTQzMzMzfQ.2mLGG-aPZ1rhYhrznTnqi1OJqYz_6nYNHG9mfVjNmy8",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/users/3/follower",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"users",
+												"3",
+												"follower"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 08 Dec 2023 12:46:19 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"followerList\": [\n        \"로비스트\"\n    ]\n}"
+								}
+							]
+						}
+					],
+					"description": "- 유저가 다른 유저를 선택해 해당 유저의 행동을 추적하는 기능입니다."
+				},
+				{
+					"name": "회원가입",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"robbie\",\n    \"password\": \"12341234\",\n    \"email\" : \"robbie@email.com\",\n    \"nickname\" : \"로비스트\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						},
+						"description": "- 전달받은 유저이름, 패스워드, 이메일, 닉네임으로 회원가입\n    \n\nresponse\n\n- 성공 - code: 200, body: {userId}\n    \n- 실패\n    \n    - Request Validation 에러 - code: 400, body: ${에러 필드} 필드 : ${에러 이유}"
+					},
+					"response": [
+						{
+							"name": "회원가입_홍길동",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"hong\",\n    \"password\": \"12345678\",\n    \"email\" : \"mishong@email.com\",\n    \"nickname\" : \"홍길동\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 09:49:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 1\n}"
+						},
+						{
+							"name": "회원가입_robbie",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"robbie\",\n    \"password\": \"12341234\",\n    \"email\" : \"robbie@email.com\",\n    \"nickname\" : \"로비스트\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 09:49:47 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 2\n}"
+						},
+						{
+							"name": "실패_중복 사용자일 경우",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"hong\",\n    \"password\": \"12345678\",\n    \"email\" : \"mishong@email.com\",\n    \"nickname\" : \"홍길동\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 09:45:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "중복된 사용자가 존재합니다."
+						}
+					]
+				},
+				{
+					"name": "로그인",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"robbie\",\n    \"password\": \"12341234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "- username, password를 Client에서 전달받기\n- username은 최소 4자 이상, 10자 이하이며 알파벳 소문자(a\\~z), 숫자(0\\~9)로 구성되어야 한다.\n- password는 최소 8자 이상, 15자 이하이며 알파벳 대소문자(a\\~z, A\\~Z), 숫자(0\\~9)로 구성되어야 한다.\n- DB에 중복된 username이 없다면 회원을 저장하고 Client 로 성공했다는 메시지, 상태코드 반환하기\n    \n\nresponse 상세\n\n- 로그인 성공\n    - code: 200, body: 로그인에 성공하였습니다.\n- 로그인 실패\n    - 로그인 실패로 임시차단 - code: 403, body: 일시적으로 접근이 제한된 사용자입니다. {0} 이후에 시도해주세요.\n    - 회원 차단 - code: 403, body: 차단된 사용자입니다. 관리자에게 문의해주세요\n    - 패스워드 틀림 및 기타 로그인 실패 - code: 401, body: 로그인에 실패하였습니다."
+					},
+					"response": [
+						{
+							"name": "로그인_성공_robbie",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"robbie\",\n    \"password\": \"12341234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "AccessToken",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjAzMjk0NCwiaWF0IjoxNzAyMDI5MzQ0fQ.oOUbNQDSikCkIW2yA6QZFOff0iZ88h_-02QZKKpQe4s"
+								},
+								{
+									"key": "refreshToken",
+									"value": "5d0e08be-0dc9-4b88-9b7f-809fc294bba1"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 09:55:44 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "로그인에 성공하였습니다."
+						},
+						{
+							"name": "로그인_성공_홍길동",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"robbie\",\n    \"password\": \"12341234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "로그인_실패",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"robbie\",\n    \"password\": \"1234123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 09:56:18 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "로그인에 실패하였습니다."
+						},
+						{
+							"name": "로그인_임시차단",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"robbie\",\n    \"password\": \"1234124\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "147"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 10:01:29 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "로그인에 실패하였습니다.일시적으로 접근이 제한된 사용자입니다. 2023-12-08T19:31:29.236004 이후에 시도해주세요."
+						},
+						{
+							"name": "로그인_차단",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"robbie\",\n    \"password\": \"1234124\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "100"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 10:01:58 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "로그인에 실패하였습니다.차단된 사용자입니다. 관리자에게 문의해주세요."
+						}
+					]
+				},
+				{
+					"name": "로그아웃",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/users/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"logout"
+							]
+						},
+						"description": "- 로그아웃 (토큰제거)\n    \n\nresponse\n\n- code: 204"
+					},
+					"response": [
+						{
+							"name": "로그아웃",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/users/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"logout"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 10:00:28 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "회원정보 조회",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "- 로그인한 유저의 회원정보를 반환\n    \n\nresponse\n\n- code: 200\n- body: { 유저정보 }"
+					},
+					"response": [
+						{
+							"name": "성공",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 07:05:45 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"robbie\",\n    \"email\": \"robbie@email.com\",\n    \"nickname\": \"로비스트\",\n    \"description\": null\n}"
+						},
+						{
+							"name": "실패_차단된 사용자",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 07:03:13 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "차단된 사용자입니다. 관리자에게 문의해주세요."
+						}
+					]
+				},
+				{
+					"name": "회원정보수정",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nickname\" : \"수정 닉네임\",\n    \"email\" : \"수정@이메일.형식\",\n    \"description\" : \"수정 설명\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"update"
+							]
+						},
+						"description": "- 로그인한 유저의 회원정보를 수정\n    \n\nresponse\n\n- 성공 - code: 200, body: { 유저정보 }\n- 실패 - code: 400, body: 중복된 Email 입니다."
+					},
+					"response": [
+						{
+							"name": "성공",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nickname\" : \"수정 닉네임\",\n    \"email\" : \"수정@이메일.형식\",\n    \"description\" : \"수정 설명\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"update"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 07:06:55 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"nickname\": \"수정 닉네임\",\n    \"email\": \"수정@이메일.형식\",\n    \"description\": \"수정 설명\"\n}"
+						}
+					]
+				},
+				{
+					"name": "비밀번호수정",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"previousPassword\": \"12341234\",\r\n    \"password\" : \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"password"
+							]
+						},
+						"description": "- 로그인한 유저의 회원정보를 수정\n    \n- 입력한 현재 비밀번호가 일치해야하고, 최근 3회 동안 입력한 비밀번호를 재사용하지 않아야함\n    \n\nresponse\n\n- 성공 - code: 200, body: { 유저정보 }\n    \n- 실패\n    \n    - 현재 비밀번호가 다름 - code: 400, body: 비밀번호가 일치하지 않습니다.\n        \n    - 기록에 있는 비밀번호 - code: 400, body: 사용한 적이 있던 비밀번호입니다. 다른 비밀번호를 사용해주세요."
+					},
+					"response": [
+						{
+							"name": "성공",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"previousPassword\": \"12341234\",\r\n    \"password\" : \"12341234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 07:08:01 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"robbie\",\n    \"email\": \"수정@이메일.형식\",\n    \"nickname\": \"로비스트\",\n    \"description\": \"수정 설명\"\n}"
+						},
+						{
+							"name": "실패_현재 비밀번호가 다름",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"previousPassword\": \"password\",\r\n    \"password\" : \"12341234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"password"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 07:07:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "비밀번호가 일치하지 않습니다."
+						},
+						{
+							"name": "실패_기존에 사용했던 비밀번호",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"previousPassword\": \"12341234\",\r\n    \"password\" : \"12341234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"password"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "89"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 07:08:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "사용한 적이 있던 비밀번호입니다. 다른 비밀번호를 사용해주세요."
+						}
+					]
+				},
+				{
+					"name": "프로필 수정",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"desc\" : \"한줄소개\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/add-description",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"add-description"
+							]
+						},
+						"description": "- 유저 프로필을 수정. 현재 desc만 있음\n    \n\nresponse\n\n- 성공- code: 200, body: { description }"
+					},
+					"response": [
+						{
+							"name": "성공",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"desc\" : \"한줄소개\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/add-description",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"add-description"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 07:09:23 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"description\": \"한줄소개\"\n}"
+						}
+					]
+				}
+			],
+			"description": "User Domina 관련 API"
+		},
+		{
+			"name": "게시글",
+			"item": [
+				{
+					"name": "관리자",
+					"item": [
+						{
+							"name": "관리자_공지글 등록",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\" : \"공지글 제목\",\n    \"content\" : \"공지사항입니다.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/admin/posts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"posts"
+									]
+								},
+								"description": "- 토큰을 검사하여, 유효한 토큰일 경우에만 게시글 작성 가능\n- 게시글 제목,게시글 내용, 게시글 이미지를 저장할 수 있습니다\n    \n- 게시글 제목, 게시글 내용을 저장하고 저장된 게시글의 정보를 Client 로 반환하기"
+							},
+							"response": [
+								{
+									"name": "관리자_공지글 등록",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTcwMjEzNDAyMywiaWF0IjoxNzAyMTMwNDIzfQ.h1j7h1W1cN2ZKDcu0n1t9AqIP0PzZZ5bhKuecIjAc-o",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"title\" : \"공지글 제목\",\n    \"content\" : \"공지사항입니다.\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/admin/posts",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"posts"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 14:03:16 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"title\": \"공지글 제목\",\n    \"content\": \"공지사항입니다.\",\n    \"nickname\": \"admin\",\n    \"createdAt\": \"2023-12-09T23:03:16.6672618\",\n    \"modifedAt\": \"2023-12-09T23:03:16.6672618\"\n}"
+								}
+							]
+						},
+						{
+							"name": "관리자_게시글 수정",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful PUT request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\" : \"수정할 제목\",\n    \"content\" : \"수정할 내용\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/admin/posts/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"posts",
+										"1"
+									]
+								},
+								"description": "- 선택한 게시글 제목, 작성 내용을 수정할 수 있습니다\n- 토큰을 검사한 후, 유효한 토큰이면서 해당 사용자가 작성한 게시글만 수정 가능\n- 게시글 제목, 게시글 내용, 게시글을 수정하고 수정된 게시글 정보는 Client 로 반환됩니다"
+							},
+							"response": [
+								{
+									"name": "관리자_게시글 수정",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTcwMjEzNDAyMywiaWF0IjoxNzAyMTMwNDIzfQ.h1j7h1W1cN2ZKDcu0n1t9AqIP0PzZZ5bhKuecIjAc-o",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"title\" : \"제목\",\n    \"content\" : \"관리자 권한으로 수정합니다.\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/admin/posts/5",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"posts",
+												"5"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 14:07:07 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"title\": \"제목\",\n    \"content\": \"관리자 권한으로 수정합니다.\",\n    \"nickname\": \"로비스트\",\n    \"createdAt\": \"2023-12-09T22:54:27.083086\",\n    \"modifedAt\": \"2023-12-09T22:54:27.083086\"\n}"
+								}
+							]
+						},
+						{
+							"name": "관리자_게시글 삭제",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTcwMjEzNDAyMywiaWF0IjoxNzAyMTMwNDIzfQ.h1j7h1W1cN2ZKDcu0n1t9AqIP0PzZZ5bhKuecIjAc-o",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/admin/posts/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"posts",
+										"1"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "관리자_게시글 삭제",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTcwMjEzNDAyMywiaWF0IjoxNzAyMTMwNDIzfQ.h1j7h1W1cN2ZKDcu0n1t9AqIP0PzZZ5bhKuecIjAc-o",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/admin/posts/4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"posts",
+												"4"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "35"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 14:08:26 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "게시글이 삭제되었습니다."
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "전체 게시글 조회",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							},
+							{
+								"key": "RefreshToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMzUxNDk2NywiaWF0IjoxNzAwOTIyOTY3fQ.qheqkXUJR8GhFdf6qGmdS4Mqm40WNK9yGIWds4odz2E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts"
+							]
+						},
+						"description": "- 선택한 게시글의 정보를 조회할 수 있습니다.\n    - 반환 받은 게시글 정보에는 게시글 제목, 게시글 내용, 작성자 , 작성일 정보, 선택한 게시글의 댓글들이 있다."
+					},
+					"response": [
+						{
+							"name": "전체 게시글 조회",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMzUxNDk2NywiaWF0IjoxNzAwOTIyOTY3fQ.qheqkXUJR8GhFdf6qGmdS4Mqm40WNK9yGIWds4odz2E",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/posts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 14:11:52 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"title\": \"공지글 제목\",\n        \"content\": \"공지사항입니다.\",\n        \"nickname\": \"admin\",\n        \"createdAt\": \"2023-12-09T23:03:16.667262\",\n        \"modifedAt\": \"2023-12-09T23:03:16.66926\"\n    },\n    {\n        \"title\": \"게시글 제목\",\n        \"content\": \"게시글 내용\",\n        \"nickname\": \"admin\",\n        \"createdAt\": \"2023-12-06T19:07:03.90526\",\n        \"modifedAt\": \"2023-12-06T19:07:04.043888\"\n    },\n    {\n        \"title\": \"제목\",\n        \"content\": \"관리자 권한으로 수정합니다.\",\n        \"nickname\": \"로비스트\",\n        \"createdAt\": \"2023-12-09T22:54:27.083086\",\n        \"modifedAt\": \"2023-12-09T23:07:07.600045\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "선택 게시글 조회",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							},
+							{
+								"key": "RefreshToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMzUxNDk2NywiaWF0IjoxNzAwOTIyOTY3fQ.qheqkXUJR8GhFdf6qGmdS4Mqm40WNK9yGIWds4odz2E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						},
+						"description": "- 선택한 게시글의 정보를 조회할 수 있습니다.\n    - 반환 받은 게시글 정보에는 게시글 제목, 게시글 내용, 작성자 , 작성일 정보, 선택한 게시글의 댓글들이 있다."
+					},
+					"response": [
+						{
+							"name": "선택 게시글 조회 성공",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMzUxNDk2NywiaWF0IjoxNzAwOTIyOTY3fQ.qheqkXUJR8GhFdf6qGmdS4Mqm40WNK9yGIWds4odz2E",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/posts/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 13:53:56 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"title\": \"게시글 제목\",\n    \"content\": \"게시글 내용\",\n    \"nickname\": \"nickname\",\n    \"createdAt\": \"2023-12-06T19:07:03.90526\",\n    \"modifedAt\": \"2023-12-06T19:07:04.043888\"\n}"
+						},
+						{
+							"name": "선택 게시글 조회 실패",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMzUxNDk2NywiaWF0IjoxNzAwOTIyOTY3fQ.qheqkXUJR8GhFdf6qGmdS4Mqm40WNK9yGIWds4odz2E",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/posts/9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"9"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 14:15:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "포스트가 존재하지 않습니다."
+						}
+					]
+				},
+				{
+					"name": "해당 유저 게시글 조회",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/userposts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"userposts"
+							]
+						},
+						"description": "로그인된 유저가 작성한 전체 게시글을 조회합니다."
+					},
+					"response": [
+						{
+							"name": "해당 유저 게시글 조회",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjEzMzM0OCwiaWF0IjoxNzAyMTI5NzQ4fQ.XfEqXqwL6mS_tjGU6p-5bMqxv6MT_axP1CdZAGLcU-c",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/posts/userposts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"userposts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 13:55:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"title\": \"제목 수정\",\n        \"content\": \"내용 수정\",\n        \"nickname\": \"로비스트\",\n        \"createdAt\": \"2023-12-09T22:53:13.793481\",\n        \"modifedAt\": \"2023-12-09T22:53:25.424975\"\n    },\n    {\n        \"title\": \"게시글 제목\",\n        \"content\": \"게시글 내용\",\n        \"nickname\": \"로비스트\",\n        \"createdAt\": \"2023-12-09T22:54:27.083086\",\n        \"modifedAt\": \"2023-12-09T22:54:27.083086\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "게시글 등록",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\" : \"게시글 제목\",\n    \"content\" : \"게시글 내용\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts"
+							]
+						},
+						"description": "- 토큰을 검사하여, 유효한 토큰일 경우에만 게시글 작성 가능\n- 게시글 제목,게시글 내용, 게시글 이미지를 저장할 수 있습니다\n    \n- 게시글 제목, 게시글 내용을 저장하고 저장된 게시글의 정보를 Client 로 반환하기"
+					},
+					"response": [
+						{
+							"name": "게시글 등록",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\" : \"게시글 제목\",\n    \"content\" : \"게시글 내용\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/posts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 13:50:04 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"title\": \"게시글 제목\",\n    \"content\": \"게시글 내용\",\n    \"nickname\": \"로비스트\",\n    \"createdAt\": \"2023-12-09T22:50:04.6220808\",\n    \"modifedAt\": \"2023-12-09T22:50:04.6220808\"\n}"
+						}
+					]
+				},
+				{
+					"name": "게시글 수정",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful PUT request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\" : \"수정할 제목\",\n    \"content\" : \"수정할 내용\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						},
+						"description": "- 선택한 게시글 제목, 작성 내용을 수정할 수 있습니다\n- 토큰을 검사한 후, 유효한 토큰이면서 해당 사용자가 작성한 게시글만 수정 가능\n- 게시글 제목, 게시글 내용, 게시글을 수정하고 수정된 게시글 정보는 Client 로 반환됩니다"
+					},
+					"response": [
+						{
+							"name": "게시글 수정 성공",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\" : \"제목 수정\",\n    \"content\" : \"내용 수정\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/posts/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 13:51:42 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"title\": \"제목 수정\",\n    \"content\": \"내용 수정\",\n    \"nickname\": \"로비스트\",\n    \"createdAt\": \"2023-12-09T22:50:04.622081\",\n    \"modifedAt\": \"2023-12-09T22:50:04.622081\"\n}"
+						},
+						{
+							"name": "수정 실패_작성자 X",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\" : \"수정할 제목\",\n    \"content\" : \"수정할 내용\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/posts/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"2"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 14:27:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "작성자만 수정/삭제 가능합니다."
+						}
+					]
+				},
+				{
+					"name": "게시글 삭제",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/posts/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "게시글 삭제",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/posts/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 13:52:35 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "게시글이 삭제되었습니다."
+						}
+					]
+				},
+				{
+					"name": "게시글 좋아요",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDA5MzExOTgsImlhdCI6MTcwMDkzMTAxOH0.NG_YcRcutg9w1Xe9axtR7bz-5SQzkj8qaGUefV6jyXQ",
+								"type": "text"
+							},
+							{
+								"key": "RefreshToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/posts/1/likes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"1",
+								"likes"
+							]
+						},
+						"description": "- 토큰을 검사하여, 유효한 토큰일 경우에만 댓글 작성 가능\n    \n- 선택한 할일의 DB 저장 유무를 확인하기\n    \n- 선택한 할일이 있다면 댓글을 등록하고 등록된 댓글 반환하기"
+					},
+					"response": [
+						{
+							"name": "게시글 좋아요_같은유저",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMjA0NDAwOCwiaWF0IjoxNzAyMDQwNDA4fQ.k9NBnxk_DMTWFljXHiolYMxP9FKx9W3JdXm_xlNZ6G4",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/posts/1/likes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"1",
+										"likes"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:41:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "글 작성자와 같은 유저입니다."
+						},
+						{
+							"name": "게시글 좋아요_성공",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJob25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDIwNDcxOTQsImlhdCI6MTcwMjA0MzU5NH0.9tj48RsDNRckgcnGczgxIgoBojSzlUJYSyMzK6ski1A",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/posts/1/likes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"1",
+										"likes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:53:32 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "게시글 제목 좋아요."
+						},
+						{
+							"name": "게시글 좋아요_중복",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJob25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDIwNDcxOTQsImlhdCI6MTcwMjA0MzU5NH0.9tj48RsDNRckgcnGczgxIgoBojSzlUJYSyMzK6ski1A",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/posts/1/likes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"1",
+										"likes"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:53:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "이미 좋아요를 했습니다."
+						}
+					]
+				},
+				{
+					"name": "게시글 좋아요 취소",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDA5MzExOTgsImlhdCI6MTcwMDkzMTAxOH0.NG_YcRcutg9w1Xe9axtR7bz-5SQzkj8qaGUefV6jyXQ",
+								"type": "text"
+							},
+							{
+								"key": "RefreshToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/posts/1/likes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"1",
+								"likes"
+							]
+						},
+						"description": "- 토큰을 검사하여, 유효한 토큰일 경우에만 댓글 작성 가능\n    \n- 선택한 할일의 DB 저장 유무를 확인하기\n    \n- 선택한 할일이 있다면 댓글을 등록하고 등록된 댓글 반환하기"
+					},
+					"response": [
+						{
+							"name": "게시글 좋아요 취소_성공",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJob25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDIwNDcxOTQsImlhdCI6MTcwMjA0MzU5NH0.9tj48RsDNRckgcnGczgxIgoBojSzlUJYSyMzK6ski1A",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/posts/1/likes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"1",
+										"likes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "23"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:54:16 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "좋아요 삭제 완료"
+						},
+						{
+							"name": "게시글 좋아요 취소_실패",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJob25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDIwNDcxOTQsImlhdCI6MTcwMjA0MzU5NH0.9tj48RsDNRckgcnGczgxIgoBojSzlUJYSyMzK6ski1A",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/posts/1/likes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"1",
+										"likes"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:54:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "좋아요를 하지 않았습니다."
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "댓글",
+			"item": [
+				{
+					"name": "관리자",
+					"item": [
+						{
+							"name": "관리자_댓글 수정",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Successful PUT request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"postId\" : \"1\",\n    \"text\" : \"댓글 수정\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/admin/comments/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"comments",
+										"1"
+									]
+								},
+								"description": "- 선택한 게시글 제목, 작성 내용을 수정할 수 있습니다\n- 토큰을 검사한 후, 유효한 토큰이면서 해당 사용자가 작성한 게시글만 수정 가능\n- 게시글 제목, 게시글 내용, 게시글을 수정하고 수정된 게시글 정보는 Client 로 반환됩니다"
+							},
+							"response": [
+								{
+									"name": "관리자_댓글 수정",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTcwMjEzNDAyMywiaWF0IjoxNzAyMTMwNDIzfQ.h1j7h1W1cN2ZKDcu0n1t9AqIP0PzZZ5bhKuecIjAc-o",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"postId\" : \"2\",\n    \"text\" : \"관리자 권한으로 댓글 수정\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8080/api/admin/comments/3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"comments",
+												"3"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 14:40:33 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 3,\n    \"username\": \"robbie\",\n    \"text\": \"관리자 권한으로 댓글 수정\",\n    \"createdAt\": \"2023-12-09T23:32:45.231747\"\n}"
+								}
+							]
+						},
+						{
+							"name": "관리자_댓글 삭제",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/admin/comments/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"admin",
+										"comments",
+										"3"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "관리자_댓글 삭제",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "AccessToken",
+												"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTcwMjEzNDAyMywiaWF0IjoxNzAyMTMwNDIzfQ.h1j7h1W1cN2ZKDcu0n1t9AqIP0PzZZ5bhKuecIjAc-o",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:8080/api/admin/comments/3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"admin",
+												"comments",
+												"3"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Method"
+										},
+										{
+											"key": "Vary",
+											"value": "Access-Control-Request-Headers"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-XSS-Protection",
+											"value": "0"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "Pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "Expires",
+											"value": "0"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain;charset=UTF-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "32"
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 09 Dec 2023 14:41:10 GMT"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=60"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "댓글이 삭제되었습니다."
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "댓글 전체 조회",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							},
+							{
+								"key": "RefreshToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMzUxNDk2NywiaWF0IjoxNzAwOTIyOTY3fQ.qheqkXUJR8GhFdf6qGmdS4Mqm40WNK9yGIWds4odz2E",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/posts/1/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"1",
+								"comments"
+							]
+						},
+						"description": "게시글에 해당하는 댓글을 조회합니다.\n\npage값이 없을 경우, 첫페이지를 조회합니다."
+					},
+					"response": [
+						{
+							"name": "댓글 전체 조회",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTcwMzUxNDk2NywiaWF0IjoxNzAwOTIyOTY3fQ.qheqkXUJR8GhFdf6qGmdS4Mqm40WNK9yGIWds4odz2E",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/posts/2/comments?page=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"posts",
+										"2",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 14:39:23 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"id\": 3,\n            \"username\": \"robbie\",\n            \"text\": \"댓글\",\n            \"createdAt\": \"2023-12-09T23:32:45.231747\"\n        },\n        {\n            \"id\": 1,\n            \"username\": \"admin\",\n            \"text\": \"댓글 내용\",\n            \"createdAt\": \"2023-12-06T19:10:05.008933\"\n        }\n    ],\n    \"pageable\": {\n        \"pageNumber\": 0,\n        \"pageSize\": 30,\n        \"sort\": {\n            \"sorted\": true,\n            \"unsorted\": false,\n            \"empty\": false\n        },\n        \"offset\": 0,\n        \"unpaged\": false,\n        \"paged\": true\n    },\n    \"totalPages\": 1,\n    \"totalElements\": 2,\n    \"last\": true,\n    \"size\": 30,\n    \"number\": 0,\n    \"sort\": {\n        \"sorted\": true,\n        \"unsorted\": false,\n        \"empty\": false\n    },\n    \"first\": true,\n    \"numberOfElements\": 2,\n    \"empty\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "댓글 추가",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOiJBRE1JTiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ.xx1L7svkaVATbSeLBlbnD6HuKWEp9ahd5bvirRGHq4Q",
+								"type": "text"
+							},
+							{
+								"key": "RefreshToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\" : \"2\",\n    \"text\" : \"댓글 내용\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments"
+							]
+						},
+						"description": "- 토큰을 검사하여, 유효한 토큰일 경우에만 댓글 작성 가능\n    \n- 선택한 할일의 DB 저장 유무를 확인하기\n    \n- 선택한 할일이 있다면 댓글을 등록하고 등록된 댓글 반환하기"
+					},
+					"response": [
+						{
+							"name": "댓글 추가",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"postId\" : \"2\",\n    \"text\" : \"댓글\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/comments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"comments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 14:31:03 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"username\": \"robbie\",\n    \"text\": \"댓글\",\n    \"createdAt\": \"2023-12-09T23:31:03.4209012\"\n}"
+						}
+					]
+				},
+				{
+					"name": "댓글 수정",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\" : \"수정내용\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/comments/{commentId}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"{commentId}"
+							]
+						},
+						"description": "- 토큰을 검사한 후, 유효한 토큰이면서 해당 사용자가 작성한 댓글만 수정 가능\n    \n- 선택한 댓글의 DB 저장 유무를 확인하기\n    \n- 선택한 댓글이 있다면 댓글 수정하고 수정된 댓글 반환하기"
+					},
+					"response": [
+						{
+							"name": "댓글 수정",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"text\" : \"댓글 수정\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/comments/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"comments",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 14:31:50 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"username\": \"robbie\",\n    \"text\": \"댓글 수정\",\n    \"createdAt\": \"2023-12-09T23:31:03.420901\"\n}"
+						}
+					]
+				},
+				{
+					"name": "댓글 삭제",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/comments/{commentId}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"{commentId}"
+							]
+						},
+						"description": "- 토큰을 검사한 후, 유효한 토큰이면서 해당 사용자가 작성한 댓글만 삭제 가능\n    \n- 선택한 댓글의 DB 저장 유무를 확인하기\n    \n- 선택한 댓글이 있다면 댓글 삭제하고 Client 로 성공했다는 메시지, 상태코드 반환하기"
+					},
+					"response": [
+						{
+							"name": "댓글 삭제",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSb2JiaWUiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTc5OTQ0NzAzNCwiaWF0IjoxNzk5NDQzNDM0fQ._Rm6bZNtV-E1pF28LCKhPeONgdiEMRvs2mMrRmdvTgs",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/comments/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"comments",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 14:32:11 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "댓글이 삭제되었습니다."
+						}
+					]
+				},
+				{
+					"name": "댓글 좋아요",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDA5MzExOTgsImlhdCI6MTcwMDkzMTAxOH0.NG_YcRcutg9w1Xe9axtR7bz-5SQzkj8qaGUefV6jyXQ",
+								"type": "text"
+							},
+							{
+								"key": "RefreshToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/comments/1/like",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"1",
+								"like"
+							]
+						},
+						"description": "- 토큰을 검사하여, 유효한 토큰일 경우에만 댓글 작성 가능\n    \n- 선택한 할일의 DB 저장 유무를 확인하기\n    \n- 선택한 할일이 있다면 댓글을 등록하고 등록된 댓글 반환하기"
+					},
+					"response": [
+						{
+							"name": "댓글 좋아요_중복",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJob25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDIwNDcxOTQsImlhdCI6MTcwMjA0MzU5NH0.9tj48RsDNRckgcnGczgxIgoBojSzlUJYSyMzK6ski1A",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/comments/1/likes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"comments",
+										"1",
+										"likes"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:41:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "이미 좋아요를 했습니다."
+						},
+						{
+							"name": "댓글 좋아요_성공",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJob25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDIwNDcxOTQsImlhdCI6MTcwMjA0MzU5NH0.9tj48RsDNRckgcnGczgxIgoBojSzlUJYSyMzK6ski1A",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/comments/2/likes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"comments",
+										"2",
+										"likes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:56:34 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "여기 가지마세요 사장님 무서워요 좋아요."
+						}
+					]
+				},
+				{
+					"name": "댓글 좋아요 취소",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "AccessToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDA5MzExOTgsImlhdCI6MTcwMDkzMTAxOH0.NG_YcRcutg9w1Xe9axtR7bz-5SQzkj8qaGUefV6jyXQ",
+								"type": "text"
+							},
+							{
+								"key": "RefreshToken",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/comments/1/like",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"1",
+								"like"
+							]
+						},
+						"description": "- 토큰을 검사하여, 유효한 토큰일 경우에만 댓글 작성 가능\n    \n- 선택한 할일의 DB 저장 유무를 확인하기\n    \n- 선택한 할일이 있다면 댓글을 등록하고 등록된 댓글 반환하기"
+					},
+					"response": [
+						{
+							"name": "댓글 좋아요 취소_성공",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJob25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDIwNDcxOTQsImlhdCI6MTcwMjA0MzU5NH0.9tj48RsDNRckgcnGczgxIgoBojSzlUJYSyMzK6ski1A",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/comments/1/likes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"comments",
+										"1",
+										"likes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "23"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:55:27 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "좋아요 삭제 완료"
+						},
+						{
+							"name": "댓글 좋아요 취소_실패",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AccessToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJob25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDIwNDcxOTQsImlhdCI6MTcwMjA0MzU5NH0.9tj48RsDNRckgcnGczgxIgoBojSzlUJYSyMzK6ski1A",
+										"type": "text"
+									},
+									{
+										"key": "RefreshToken",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb25nIiwiYXV0aCI6IlVTRVIiLCJleHAiOjE3MDM1MjAxMDksImlhdCI6MTcwMDkyODEwOX0.9CZShy5s7A_7R9u2WkAn5nudWllzVWo_6wYZu55liqE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:55:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "좋아요를 하지 않았습니다."
+						}
+					]
+				}
+			]
+		}
+	]
+}
